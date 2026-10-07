@@ -1,10 +1,12 @@
-import { Geist_Mono, Inter } from "next/font/google"
+import { Cairo, Montserrat } from "next/font/google"
 import { hasLocale } from "next-intl"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages, setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
+
 import { routing } from "@/i18n/routing"
 import { cn } from "@/lib/utils"
+import Provider from "@/provider/Provider"
 
 import "./globals.css"
 
@@ -15,14 +17,18 @@ interface Props {
   }>
 }
 
-const inter = Inter({
+const montserrat = Montserrat({
   subsets: ["latin"],
-  variable: "--font-sans"
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-montserrat",
+  display: "swap"
 })
 
-const fontMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono"
+const cairo = Cairo({
+  subsets: ["arabic"],
+  weight: ["200", "300", "400", "500", "600", "700", "800", "900", "1000"],
+  variable: "--font-cairo",
+  display: "swap"
 })
 
 export function generateStaticParams() {
@@ -31,17 +37,30 @@ export function generateStaticParams() {
 
 export default async function RootLayout({ children, params }: Props) {
   const { locale } = await params
-  if (!hasLocale(routing.locales, locale)) { notFound()}
+
+  if (!hasLocale(routing.locales, locale)) {
+    notFound()
+  }
 
   setRequestLocale(locale)
+
   const messages = await getMessages()
   const direction = locale === "ar" ? "rtl" : "ltr"
 
   return (
-    <html lang={locale} dir={direction} suppressHydrationWarning className={cn("antialiased", fontMono.variable, "font-sans", inter.variable)}>
+    <html
+      lang={locale}
+      dir={direction}
+      suppressHydrationWarning
+      className={cn(
+        "antialiased",
+        montserrat.variable,
+        cairo.variable,
+      )}
+    >
       <body>
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <Provider>{children}</Provider>
         </NextIntlClientProvider>
       </body>
     </html>

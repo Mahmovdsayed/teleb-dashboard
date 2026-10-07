@@ -1,7 +1,41 @@
 {
+  "LoginPage": {
+    "title": "Welcome back",
+    "subtitle": "Sign in to continue to your account",
+    "fields": {
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email",
+        "description": "Enter the email address associated with your account"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter your password",
+        "description": "Enter your account password"
+      }
+    },
+    "submit": {
+      "idle": "Sign In",
+      "loading": "Please wait…",
+      "success": "Signed in successfully"
+    },
+    "errors": {
+      "invalidCredentials": "The email or password you entered is incorrect",
+      "network": "Something went wrong. Please try again",
+      "unknown": "An unexpected error occurred"
+    }
+  },
+
   "dashboard": {
     "title": "Welcome to the Dashboard!",
     "description": "You can now add components and start building.",
     "button": "Button"
+  },
+
+  "metadata": {
+    "login": {
+      "title": "Sign In to Your Teleb Furniture Account",
+      "description": "Sign in to your Teleb Furniture account to access your dashboard, manage your furniture products, and manage your account securely."
+    }
   }
 }
