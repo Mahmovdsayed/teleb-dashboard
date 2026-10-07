@@ -5,8 +5,17 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   reactCompiler: true,
+  productionBrowserSourceMaps: false,
+  poweredByHeader: false,
+  compress: true,
+  compiler: {
+    removeConsole: true,
+  },
   experimental: {
+    turbopackGc: true,
+    turbopackLazyDynamicImports: true,
     turbopackRustReactCompiler: true,
+    turbopackPluginRuntimeStrategy: "workerThreads",
   },
 }
 
