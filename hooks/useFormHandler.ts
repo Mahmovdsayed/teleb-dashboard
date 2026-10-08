@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useLocale } from "next-intl"
 import { ZodTypeAny } from "zod"
 import { localizedZodError, type Lang } from "@/lib/getValidationErrorMap"
+import { apiRequest } from "@/lib/api-request"
 
 interface UseFormHandlerOptions<T extends FieldValues> {
   schema: ZodTypeAny
@@ -65,25 +66,11 @@ export function useFormHandler<T extends FieldValues>({
       } else {
         if (!endpoint) throw new Error("No endpoint or service provided")
 
-        const res = await fetch(endpoint, {
-          method: method.toUpperCase(),
-          headers: { "Content-Type": "application/json", "Accept-Language": locale },
-          credentials: "include",
-          body: JSON.stringify(data),
+        responseData = await apiRequest(endpoint, {
+          method: method.toUpperCase() as "POST" | "PATCH" | "PUT" | "DELETE",
+          body: data,
+          locale,
         })
-
-        const text = await res.text()
-        const parsed = text ? JSON.parse(text) : null
-
-        if (!res.ok) {
-          const message = parsed?.message || parsed?.error?.message || parsed?.error || res.statusText || "Request failed"
-          const err: any = new Error(typeof message === "string" ? message : "Request failed")
-          err.status = res.status
-          err.data = parsed
-          throw err
-        }
-
-        responseData = parsed
       }
 
       const isBetterAuthResult = responseData && typeof responseData === "object" && "error" in responseData

@@ -14,7 +14,7 @@ const Provider = ({ children }: IProps) => {
     const [queryClient] = useState(() => new QueryClient());
     return <>
         <QueryClientProvider client={queryClient}>
-            <NextThemesProvider enableSystem={true} storageKey="teleb_theme" attribute="class">
+            <NextThemesProvider enableSystem defaultTheme="system" disableTransitionOnChange storageKey="teleb_theme" attribute="class">
                 <Toaster timeout={5000} />
                 <TooltipProvider>
                     {children}

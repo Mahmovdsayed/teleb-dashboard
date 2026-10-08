@@ -27,9 +27,23 @@
   },
 
   "dashboard": {
+    "brand": "Teleb Furniture",
     "title": "Welcome to the Dashboard!",
     "description": "You can now add components and start building.",
-    "button": "Button"
+    "button": "Button",
+    "navigation": {
+      "title": "Main menu",
+      "dashboard": "Dashboard",
+      "products": "Products",
+      "orders": "Orders",
+      "settings": "Settings"
+    },
+    "user": {
+      "logout": "Log out",
+      "loggingOut": "Logging out…",
+      "logoutSuccess": "You have been logged out successfully.",
+      "logoutError": "Could not log out. Please try again."
+    }
   },
 
   "metadata": {
@@ -37,5 +51,9 @@
       "title": "Sign In to Your Teleb Furniture Account",
       "description": "Sign in to your Teleb Furniture account to access your dashboard, manage your furniture products, and manage your account securely."
     }
+  },
+
+  "LanguageSwitcher": {
+    "label": "Switch language"
   }
 }

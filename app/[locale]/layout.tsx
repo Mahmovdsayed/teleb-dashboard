@@ -3,11 +3,9 @@ import { hasLocale } from "next-intl"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages, setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
-
 import { routing } from "@/i18n/routing"
 import { cn } from "@/lib/utils"
 import Provider from "@/provider/Provider"
-
 import "./globals.css"
 
 interface Props {
@@ -60,7 +58,9 @@ export default async function RootLayout({ children, params }: Props) {
     >
       <body>
         <NextIntlClientProvider messages={messages}>
-          <Provider>{children}</Provider>
+          <Provider>
+            {children}
+          </Provider>
         </NextIntlClientProvider>
       </body>
     </html>
