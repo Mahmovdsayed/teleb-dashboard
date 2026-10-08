@@ -15,13 +15,21 @@ export default async function proxy(request: NextRequest) {
   const isLogin = pathnameWithoutLocale === "/login"
 
   if (!isDashboard && !isLogin) return intlMiddleware(request)
-  
+
   const token = request.cookies.get("access_token")?.value
+  const result = token ? await verifyAccessToken(token) : null
+
+  if (token && !result?.valid) {
+    const response = NextResponse.redirect(new URL(`/${locale}/login`, request.url))
+    response.cookies.delete("access_token")
+    return response
+  }
+
   const user = token ? await verifyAccessToken(token) : null
 
   if (isDashboard && !user) return NextResponse.redirect(new URL(`/${locale}/login`, request.url))
   if (isLogin && user) return NextResponse.redirect(new URL(`/${locale}`, request.url))
-  
+
   return intlMiddleware(request)
 }
 
