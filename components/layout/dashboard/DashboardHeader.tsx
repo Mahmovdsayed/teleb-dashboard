@@ -14,7 +14,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home } from "lucide-react";
 import React from "react";
-// import LogOutButton from "@/components/ui/LogOutButton";
 import ModeToggle from "./ModeToggle";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslations } from "next-intl";
@@ -23,6 +22,15 @@ const DashboardHeader = () => {
     const pathname = usePathname();
     const t = useTranslations("dashboard")
     const segments = pathname.split("/").filter(Boolean);
+    const translatedSegments: Record<string, string> = {
+        products: t("navigation.products"),
+        collection: t("navigation.collections"),
+        banner: t("navigation.banners"),
+        offer: t("navigation.offers"),
+        message: t("navigation.messages"),
+        add: t("resources.add"),
+        edit: t("resources.edit"),
+    }
 
     return (
         <header className="flex h-16 shrink-0 items-center justify-between border-b mb-5 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
@@ -69,7 +77,7 @@ const DashboardHeader = () => {
                                                             />
                                                         }
                                                     >
-                                                        {segment}
+                                                        {translatedSegments[segment] ?? segment}
                                                     </BreadcrumbLink>
                                                 </BreadcrumbItem>
                                             </div>
@@ -82,7 +90,7 @@ const DashboardHeader = () => {
                                         <BreadcrumbSeparator />
                                         <BreadcrumbItem>
                                             <BreadcrumbPage className="capitalize truncate max-w-[100px] sm:max-w-full">
-                                                {segment}
+                                                {translatedSegments[segment] ?? segment}
                                             </BreadcrumbPage>
                                         </BreadcrumbItem>
                                     </React.Fragment>
@@ -95,7 +103,6 @@ const DashboardHeader = () => {
             <div className="flex items-center gap-2 px-4">
                 <ModeToggle />
                 <LanguageSwitcher />
-                {/* <LogOutButton isHeader={true} isFullWidth={false} /> */}
             </div>
         </header>
     );

@@ -28,6 +28,11 @@
 
   "dashboard": {
     "brand": "Teleb Furniture",
+    "metadata": {
+      "siteName": "Teleb Furniture",
+      "homeTitle": "Dashboard",
+      "homeDescription": "Manage your Teleb Furniture store from the dashboard."
+    },
     "title": "Welcome to the Dashboard!",
     "description": "You can now add components and start building.",
     "button": "Button",
@@ -35,14 +40,66 @@
       "title": "Main menu",
       "dashboard": "Dashboard",
       "products": "Products",
-      "orders": "Orders",
-      "settings": "Settings"
+      "collections": "Collections",
+      "banners": "Banners",
+      "offers": "Offers",
+      "messages": "Messages"
     },
     "user": {
       "logout": "Log out",
       "loggingOut": "Logging out…",
       "logoutSuccess": "You have been logged out successfully.",
       "logoutError": "Could not log out. Please try again."
+    },
+    "resources": {
+      "add": "Add",
+      "edit": "Edit",
+      "back": "Back to list",
+      "create": "Create",
+      "save": "Save changes",
+      "nameLabel": "Name",
+      "descriptionLabel": "Description",
+      "idLabel": "ID",
+      "createTitle": "Add {resource}",
+      "editTitle": "Edit {resource}",
+      "products": {
+        "title": "Products",
+        "singular": "product",
+        "listDescription": "Browse and manage the furniture products in your catalog. Create products, update their details, and keep your store information organized in one place.",
+        "emptyTitle": "No products yet",
+        "emptyDescription": "Add your first product to start building the catalog.",
+        "formDescription": "Add a clear name and description for this product. These details help your team identify and manage products in the catalog."
+      },
+      "collections": {
+        "title": "Collections",
+        "singular": "collection",
+        "listDescription": "Group related products into collections to keep your catalog easy to browse. Create collections and update their details as your product range changes.",
+        "emptyTitle": "No collections yet",
+        "emptyDescription": "Add a collection to organize related products.",
+        "formDescription": "Choose a clear collection name and describe which products it represents. This helps keep related items organized in your catalog."
+      },
+      "banners": {
+        "title": "Banners",
+        "singular": "banner",
+        "listDescription": "Manage the banners customers see in your store. Create and update banner information to keep featured content current.",
+        "emptyTitle": "No banners yet",
+        "emptyDescription": "Add a banner to feature content in your store.",
+        "formDescription": "Add a recognizable name and a short description for this banner so your team can identify its purpose."
+      },
+      "offers": {
+        "title": "Offers",
+        "singular": "offer",
+        "listDescription": "Review and manage the promotional offers available in your store. Create offers and update their information as promotions change.",
+        "emptyTitle": "No offers yet",
+        "emptyDescription": "Add an offer to promote products in your store.",
+        "formDescription": "Give this offer a clear name and describe its purpose so it is easy to recognize and manage."
+      },
+      "messages": {
+        "title": "Messages",
+        "listDescription": "Review messages sent by your customers and keep track of incoming questions or feedback in one place.",
+        "emptyTitle": "No messages yet",
+        "emptyDescription": "Customer messages will appear here."
+      }
     }
   },
 

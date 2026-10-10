@@ -6,7 +6,7 @@ import { notFound } from "next/navigation"
 import { routing } from "@/i18n/routing"
 import { cn } from "@/lib/utils"
 import Provider from "@/provider/Provider"
-import "./globals.css"
+import "../globals.css"
 
 interface Props {
   children: React.ReactNode

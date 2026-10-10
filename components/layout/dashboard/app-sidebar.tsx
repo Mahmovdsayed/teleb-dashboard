@@ -13,7 +13,7 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
-import { LayoutDashboardIcon, PackageIcon, ShoppingCartIcon, Settings2Icon, FrameIcon, PieChartIcon, MapIcon } from "lucide-react"
+import { LayoutDashboardIcon, PackageIcon, LayersIcon, ImageIcon, BadgePercentIcon, MessageSquareIcon } from "lucide-react"
 import { useLocale } from "next-intl"
 import { useTranslations } from "next-intl"
 import { useStore } from "@/store"
@@ -35,14 +35,24 @@ const data = {
       icon: <PackageIcon />,
     },
     {
-      title: "orders",
-      url: "#",
-      icon: <ShoppingCartIcon />,
+      title: "collections",
+      url: "/collection",
+      icon: <LayersIcon />,
     },
     {
-      title: "settings",
-      url: "#",
-      icon: <Settings2Icon />,
+      title: "banners",
+      url: "/banner",
+      icon: <ImageIcon />,
+    },
+    {
+      title: "offers",
+      url: "/offer",
+      icon: <BadgePercentIcon />,
+    },
+    {
+      title: "messages",
+      url: "/message",
+      icon: <MessageSquareIcon />,
     },
   ],
 }

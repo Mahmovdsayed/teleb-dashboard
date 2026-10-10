@@ -12,10 +12,10 @@ const nextConfig: NextConfig = {
     removeConsole: true,
   },
   experimental: {
-    turbopackGc: true,
-    turbopackLazyDynamicImports: true,
+    // turbopackGc: true,
+    // turbopackLazyDynamicImports: true,
     turbopackRustReactCompiler: true,
-    turbopackPluginRuntimeStrategy: "workerThreads",
+    // turbopackPluginRuntimeStrategy: "workerThreads",
   },
 }
 
