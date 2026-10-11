@@ -11,7 +11,6 @@ type AppQueryArgs<TData> = {
   retry?: number
   staleTime?: number
   refetchInterval?: number
-  refetchOnMount?: boolean
   refetchOnWindowFocus?: boolean
   gcTime?: number
   initialData?: TData
@@ -20,7 +19,6 @@ type AppQueryArgs<TData> = {
 export function useAppQuery<TData>({
   gcTime = ONE_DAY,
   refetchInterval = 0,
-  refetchOnMount = false,
   refetchOnWindowFocus = false,
   staleTime = ONE_DAY,
   queryKey,
@@ -36,7 +34,7 @@ export function useAppQuery<TData>({
     staleTime,
     gcTime,
     refetchInterval,
-    refetchOnMount,
+    refetchOnMount: "always",
     refetchOnWindowFocus,
     retry,
     initialData,

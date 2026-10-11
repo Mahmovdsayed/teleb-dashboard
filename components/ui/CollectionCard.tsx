@@ -8,24 +8,19 @@ import { Button } from "./button";
 import { Pencil, CalendarDays } from "lucide-react";
 import { formatDate } from "@/functions/format-date";
 import { useRouter } from "next/navigation";
-import { useOptimisticDashboard } from "@/hooks/useOptimisticDashboard";
 import DeleteButton from "./DeleteButton";
-import { deleteCollection, getCollections } from "@/services/collection";
+import { deleteCollection } from "@/services/collection";
 
 interface IProps {
     collection: Collection;
+    refetch: () => void
 }
 
-const CollectionCard = ({ collection }: IProps) => {
+const CollectionCard = ({ collection, refetch }: IProps) => {
     const { push } = useRouter()
     const locale = useLocale();
     const t = useTranslations("dashboard.resources");
     const name = locale === "en" ? collection.enName : collection.arName;
-
-    const { onDelete, onSuccess, onError } = useOptimisticDashboard({
-        queryKey: ["collections"],
-        arrayKey: "collections"
-    });
 
 
     return (
@@ -64,11 +59,9 @@ const CollectionCard = ({ collection }: IProps) => {
                 </Button>
 
                 <DeleteButton
+                    refetch={refetch}
                     title={t("delete")}
                     serviceFunc={() => deleteCollection(String(collection.id), locale)}
-                    onMutate={() => onDelete(collection.id)}
-                    onError={onError}
-                    onSuccess={onSuccess}
                     warningMessage={
                         locale === "en"
                             ? "Are you sure you want to delete this collection? This action cannot be undone."

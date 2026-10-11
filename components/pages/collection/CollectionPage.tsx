@@ -10,7 +10,7 @@ import { useTranslations } from "next-intl";
 
 const CollectionPage = () => {
     const t = useTranslations("dashboard.resources")
-    const { data, isLoading } = useAppQuery({
+    const { data, isLoading, refetch } = useAppQuery({
         queryFn: getCollections,
         queryKey: ['collections'],
     })
@@ -28,7 +28,7 @@ const CollectionPage = () => {
             />
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3">
                 {data?.map((collection: Collection) =>
-                    <CollectionCard collection={collection} key={collection.id} />
+                    <CollectionCard refetch={refetch} collection={collection} key={collection.id} />
                 )}
             </div>
         </section>

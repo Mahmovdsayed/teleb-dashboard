@@ -26,6 +26,7 @@ export async function apiRequest<T = unknown>(url: string, { method = "GET", bod
     method,
     headers,
     credentials,
+    cache: method === "GET" ? "no-store" : "default",
     body: body === undefined ? undefined : JSON.stringify(body),
   })
 

@@ -14,25 +14,20 @@ interface IProps {
     isIcon: boolean;
     title: string;
     serviceFunc: () => Promise<any>;
-    refetch?: () => void;
+    refetch: () => void;
     warningMessage: string;
     className?: string;
-    onMutate?: () => any;
-    onError?: (error: any, context?: any) => void;
-    onSuccess?: () => void;
 }
 
-const DeleteButton = ({ isIcon, title, serviceFunc, refetch, warningMessage, className, onMutate, onError, onSuccess }: IProps) => {
+const DeleteButton = ({ isIcon, title, serviceFunc, refetch, warningMessage, className }: IProps) => {
     const t = useTranslations("dashboard.resources")
     const [open, setOpen] = useState(false);
 
     const { onSubmit, loading } = useFormHandler({
         schema: z.object({}),
         service: () => serviceFunc(),
-        onMutate,
-        onSuccess: (data, context) => {
-            onSuccess?.();
-            refetch?.();
+        onSuccess: (data) => {
+            refetch();
             toast.add({
                 title: data?.message || `${title} successfully`,
                 type: "success",
@@ -40,8 +35,8 @@ const DeleteButton = ({ isIcon, title, serviceFunc, refetch, warningMessage, cla
 
             setOpen(false);
         },
-        onError: (error, context) => {
-            onError?.(error, context);
+        onError: (error) => {
+            setOpen(false)
             const message =
                 typeof error === "string"
                     ? error

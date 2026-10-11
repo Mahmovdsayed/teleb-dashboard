@@ -7,6 +7,7 @@ import { useLocale } from "next-intl"
 import { ZodTypeAny } from "zod"
 import { localizedZodError, type Lang } from "@/lib/getValidationErrorMap"
 import { apiRequest } from "@/lib/api-request"
+import { toast } from "@/components/ui/toast"
 
 interface UseFormHandlerOptions<T extends FieldValues> {
   schema: ZodTypeAny
@@ -16,8 +17,8 @@ interface UseFormHandlerOptions<T extends FieldValues> {
   defaultValues?: DefaultValues<T>
   values?: T
   onMutate?: (data: T) => any | Promise<any>
-  onSuccess?: (data: any, context?: any) => void
-  onError?: (error: any, context?: any) => void
+  onSuccess?: (data: any, context?: any) => void | Promise<void>
+  onError?: (error: any, context?: any) => void | Promise<void>
 }
 
 export function useFormHandler<T extends FieldValues>({
@@ -52,19 +53,18 @@ export function useFormHandler<T extends FieldValues>({
 
   const submitHandler: SubmitHandler<T> = async (data) => {
     let context: any
+
     try {
       setLoading(true)
-
-      if (onMutate) {
-        context = await onMutate(data)
-      }
-
+      context = await onMutate?.(data)
       let responseData: any
 
       if (service) {
         responseData = await service(data)
       } else {
-        if (!endpoint) throw new Error("No endpoint or service provided")
+        if (!endpoint) {
+          throw new Error("No endpoint or service provided")
+        }
 
         responseData = await apiRequest(endpoint, {
           method: method.toUpperCase() as "POST" | "PATCH" | "PUT" | "DELETE",
@@ -73,16 +73,38 @@ export function useFormHandler<T extends FieldValues>({
         })
       }
 
-      const hasError = responseData?.success === false
+      if (responseData?.success === false) {
+        const message = responseData.message || "Request failed"
 
-      if (hasError) {
-        onError?.(responseData?.message || "Request failed", context)
-      } else {
-        onSuccess?.(responseData, context)
-        form.reset()
+        toast.add({
+          title: message,
+          type: "error",
+          timeout: 5000,
+        })
+
+        await onError?.(message, context)
+        return
       }
+
+      toast.add({
+        title: responseData?.message || "Operation completed successfully",
+        type: "success",
+        timeout: 5000,
+      })
+
+      await onSuccess?.(responseData, context)
+
+      form.reset()
     } catch (error: unknown) {
-      onError?.(error, context)
+      const message = error instanceof Error ? error.message : "Something went wrong"
+
+      toast.add({
+        title: message,
+        type: "error",
+        timeout: 5000,
+      })
+
+      await onError?.(error, context)
     } finally {
       setLoading(false)
     }

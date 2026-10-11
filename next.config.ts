@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
   compiler: {
-    removeConsole: true,
+    // removeConsole: true,
   },
   experimental: {
     optimizeCss: true,

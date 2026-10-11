@@ -7,6 +7,12 @@ export type Collection = {
   updatedAt: Date
 }
 
+export type collectioPayload = {
+  arName: string
+  enName: string
+  icon: string
+}
+
 export type CollectionResponse = {
   success: boolean
   data?: Collection[]

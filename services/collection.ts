@@ -1,6 +1,7 @@
 import { API_BASE_URL } from "@/constant/constant"
 import { apiRequest } from "@/lib/api-request"
 import { Collection, CollectionResponse } from "@/types/Collection.types"
+import { CreateCollectionInput } from "@/validations/collection"
 
 export const getCollections = async (): Promise<Collection[]> => {
   const response = await apiRequest<CollectionResponse>(`${API_BASE_URL}/collection/get`, {
@@ -23,9 +24,21 @@ export const deleteCollection = async (id: string, locale: string): Promise<any>
 
   if (response.success === false || response.error) {
     const message = response.message || (typeof response.error === "string" ? response.error : response.error?.message) || "Failed to delete collection"
-
     throw new Error(message)
   }
 
+  return response
+}
+
+export const addCollection = async (payload: CreateCollectionInput, locale: string): Promise<any> => {
+  const response = await apiRequest<CollectionResponse>(`${API_BASE_URL}/collection/create`, {
+    method: "POST",
+    body: payload,
+    locale,
+  })
+  if (response.success === false || response.error) {
+    const message = response.message || (typeof response.error === "string" ? response.error : response.error?.message) || "Failed to add collection"
+    throw new Error(message)
+  }
   return response
 }

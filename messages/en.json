@@ -79,7 +79,26 @@
         "listDescription": "Group related products into collections to keep your catalog easy to browse. Create collections and update their details as your product range changes.",
         "emptyTitle": "No collections yet",
         "emptyDescription": "Add a collection to organize related products.",
-        "formDescription": "Choose a clear collection name and describe which products it represents. This helps keep related items organized in your catalog."
+        "formDescription": "Choose a clear collection name and describe which products it represents. This helps keep related items organized in your catalog.",
+        "form": { "title": "Add New Collection", "description": "Create a collection to organize related furniture products." },
+        "fields": {
+          "arName": {
+            "label": "Arabic Name",
+            "placeholder": "Enter collection name in Arabic",
+            "description": "Enter the collection name in Arabic as it should appear to users."
+          },
+          "enName": {
+            "label": "English Name",
+            "placeholder": "Enter collection name in English",
+            "description": "Enter the collection name in English as it should appear to users."
+          },
+          "icon": {
+            "label": "Lucide Icon Name",
+            "placeholder": "e.g. sofa",
+            "description": "Enter only the icon name from Lucide, such as 'sofa'. Do not include JSX tags like <Sofa />. Browse available icons at lucide.dev."
+          }
+        },
+        "actions": { "back": "Back to Collections", "submit": "Add New Collection", "loading": "Adding..." }
       },
       "banners": {
         "title": "Banners",

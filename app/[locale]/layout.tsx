@@ -7,6 +7,7 @@ import { routing } from "@/i18n/routing"
 import { cn } from "@/lib/utils"
 import Provider from "@/provider/Provider"
 import "../globals.css"
+import { Metadata } from "next"
 
 interface Props {
   children: React.ReactNode
@@ -28,6 +29,11 @@ const cairo = Cairo({
   variable: "--font-cairo",
   display: "swap"
 })
+
+export const metadata: Metadata = {
+  title: "Teleb Furniture",
+  description: "Teleb Furniture is one of very few companies in Egypt who are designing and producing knocked down furniture. Using modern machinery has allowed Teleb Furniture to produce products with the highest quality at competitive prices, while the highly skilled craftsmen have contributed to high level of differentiation by adding the ethnic hand-made touch to different furniture items.",
+};
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
