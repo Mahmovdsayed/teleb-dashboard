@@ -17,10 +17,7 @@ export class ApiRequestError extends Error {
   }
 }
 
-export async function apiRequest<T = unknown>(
-  url: string,
-  { method = "GET", body, locale, credentials = "include" }: ApiRequestOptions = {},
-): Promise<T> {
+export async function apiRequest<T = unknown>(url: string, { method = "GET", body, locale, credentials = "include" }: ApiRequestOptions = {}): Promise<T> {
   const headers = new Headers()
   if (body !== undefined) headers.set("Content-Type", "application/json")
   if (locale) headers.set("Accept-Language", locale)
@@ -45,8 +42,7 @@ export async function apiRequest<T = unknown>(
 
   if (!response.ok) {
     const rawMessage = data?.message || data?.error?.message || data?.error
-    const message =
-      typeof rawMessage === "string" ? rawMessage : response.statusText || "Request failed"
+    const message = typeof rawMessage === "string" ? rawMessage : response.statusText || "Request failed"
     throw new ApiRequestError(message, response.status, data)
   }
 

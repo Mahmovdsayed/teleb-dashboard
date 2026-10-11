@@ -12,6 +12,8 @@ const nextConfig: NextConfig = {
     removeConsole: true,
   },
   experimental: {
+    optimizeCss: true,
+    inlineCss: true,
     // turbopackGc: true,
     // turbopackLazyDynamicImports: true,
     turbopackRustReactCompiler: true,
