@@ -14,3 +14,18 @@ export const getCollections = async (): Promise<Collection[]> => {
 
   return response.data ?? []
 }
+
+export const deleteCollection = async (id: string, locale: string): Promise<any> => {
+  const response = await apiRequest<CollectionResponse>(`${API_BASE_URL}/collection/delete/${id}`, {
+    method: "DELETE",
+    locale,
+  })
+
+  if (response.success === false || response.error) {
+    const message = response.message || (typeof response.error === "string" ? response.error : response.error?.message) || "Failed to delete collection"
+
+    throw new Error(message)
+  }
+
+  return response
+}

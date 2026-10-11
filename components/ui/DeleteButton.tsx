@@ -7,6 +7,7 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { Button } from "@/components/ui/button";
 import { Loader2, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { toast } from "./toast";
 
 
 interface IProps {
@@ -30,14 +31,29 @@ const DeleteButton = ({ isIcon, title, serviceFunc, refetch, warningMessage, cla
         service: () => serviceFunc(),
         onMutate,
         onSuccess: (data, context) => {
-            if (onSuccess) onSuccess();
-            if (refetch) refetch();
+            onSuccess?.();
+            refetch?.();
+            toast.add({
+                title: data?.message || `${title} successfully`,
+                type: "success",
+            });
+
             setOpen(false);
         },
         onError: (error, context) => {
-            if (onError) onError(error, context);
-            console.log(error);
-        }
+            onError?.(error, context);
+            const message =
+                typeof error === "string"
+                    ? error
+                    : error instanceof Error
+                        ? error.message
+                        : error?.message || "Something went wrong";
+
+            toast.add({
+                title: message,
+                type: "error",
+            });
+        },
     });
 
     return <>

@@ -73,17 +73,15 @@ export function useFormHandler<T extends FieldValues>({
         })
       }
 
-      const isBetterAuthResult = responseData && typeof responseData === "object" && "error" in responseData
-      const hasError = isBetterAuthResult ? Boolean(responseData.error) : responseData?.success === false
+      const hasError = responseData?.success === false
 
       if (hasError) {
-        const error = isBetterAuthResult ? responseData.error : responseData?.message || responseData
-        onError?.(error, context)
+        onError?.(responseData?.message || "Request failed", context)
       } else {
         onSuccess?.(responseData, context)
         form.reset()
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       onError?.(error, context)
     } finally {
       setLoading(false)

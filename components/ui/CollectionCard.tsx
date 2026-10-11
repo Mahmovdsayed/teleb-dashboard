@@ -10,7 +10,7 @@ import { formatDate } from "@/functions/format-date";
 import { useRouter } from "next/navigation";
 import { useOptimisticDashboard } from "@/hooks/useOptimisticDashboard";
 import DeleteButton from "./DeleteButton";
-import { getCollections } from "@/services/collection";
+import { deleteCollection, getCollections } from "@/services/collection";
 
 interface IProps {
     collection: Collection;
@@ -65,7 +65,7 @@ const CollectionCard = ({ collection }: IProps) => {
 
                 <DeleteButton
                     title={t("delete")}
-                    serviceFunc={() => getCollections()}
+                    serviceFunc={() => deleteCollection(String(collection.id), locale)}
                     onMutate={() => onDelete(collection.id)}
                     onError={onError}
                     onSuccess={onSuccess}
