@@ -10,7 +10,7 @@ import { useTranslations } from "next-intl";
 
 const CollectionPage = () => {
     const t = useTranslations("dashboard.resources")
-    const { data, isLoading, refetch } = useAppQuery({
+    const { data, isLoading, refetch } = useAppQuery<Collection[]>({
         queryFn: getCollections,
         queryKey: ['collections'],
     })

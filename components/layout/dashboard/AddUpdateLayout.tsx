@@ -2,7 +2,7 @@
 
 import SubmitButton from "@/components/forms/SubmitButton";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { SaveCheck } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 
@@ -44,7 +44,7 @@ const AddUpdateLayout = ({ onSubmit, title, desc, children, loading, href, backB
                         </Button>
 
                         <SubmitButton type="submit" disabled={loading}>
-                            <Plus />
+                            <SaveCheck />
                             {loading
                                 ? buttonLoding
                                 : buttonSubmit

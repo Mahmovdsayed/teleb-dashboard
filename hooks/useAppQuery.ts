@@ -27,7 +27,7 @@ export function useAppQuery<TData>({
   retry = 0,
   initialData,
 }: AppQueryArgs<TData>): UseQueryResult<TData> {
-  return useQuery<TData>({
+  return useQuery<TData, Error, TData>({
     queryKey,
     queryFn,
     enabled,

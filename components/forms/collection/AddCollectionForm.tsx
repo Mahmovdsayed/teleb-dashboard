@@ -17,7 +17,7 @@ const AddCollectionForm = () => {
     const locale = useLocale();
     const t = useTranslations("dashboard.resources.collections");
 
-    const { register, onSubmit, loading, reset, formState: { errors }} = useFormHandler<CreateCollectionInput>({
+    const { register, onSubmit, loading, reset, formState: { errors } } = useFormHandler<CreateCollectionInput>({
         schema: createCollectionSchema,
         defaultValues: collectionInitialValues,
         service: (data: CreateCollectionInput) => addCollection(data, locale),
@@ -35,7 +35,16 @@ const AddCollectionForm = () => {
 
     return (
         <>
-            <AddUpdateLayout onSubmit={onSubmit} buttonSubmit={t("actions.submit")} buttonLoding={t("actions.loading")} backButtonTitle={t("actions.back")} loading={loading} href="/collection" title={t("form.title")} desc={t("form.description")}>
+            <AddUpdateLayout
+                onSubmit={onSubmit}
+                buttonSubmit={t("actions.submit")}
+                buttonLoding={t("actions.loading")}
+                backButtonTitle={t("actions.back")}
+                loading={loading}
+                href="/collection"
+                title={t("form.title")}
+                desc={t("form.description")}>
+
                 <FormField
                     type="text"
                     name="arName"

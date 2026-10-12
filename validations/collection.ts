@@ -8,9 +8,11 @@ const collectionSchema = z.object({
 
 export const createCollectionSchema = z.compile(collectionSchema)
 
-export const updateCollectionSchema = z.compile(collectionSchema.partial()).refine((data) => Object.values(data).some((value) => value !== undefined), {
-  error: "At least one field must be provided",
-})
+export const updateCollectionSchema = z.compile(
+  collectionSchema.partial().refine((data) => Object.values(data).some((value) => value !== undefined), {
+    error: "At least one field must be provided",
+  })
+)
 
 export type CreateCollectionInput = z.infer<typeof createCollectionSchema>
 export type UpdateCollectionInput = z.infer<typeof updateCollectionSchema>

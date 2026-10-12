@@ -19,3 +19,13 @@ export type CollectionResponse = {
   message?: string
   error?: string | { message?: string }
 }
+
+export type ApiResponse<T> = {
+  success: boolean
+  data?: T
+  code?: string
+  message?: string
+  error?: string | { message?: string }
+}
+
+export type SingleCollectionResponse = ApiResponse<Collection>
