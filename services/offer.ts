@@ -23,3 +23,17 @@ export const getOffers = async (query: OfferQueryInput, locale: string): Promise
 
   return response.data ?? []
 }
+
+export const deleteOffer = async (id: string, locale: string): Promise<any> => {
+  const response = await apiRequest<OfferResponse>(`${API_BASE_URL}/offer/delete/${id}`, {
+    method: "DELETE",
+    locale,
+  })
+
+  if (response.success === false || response.error) {
+    const message = response.message || (typeof response.error === "string" ? response.error : response.error?.message) || "Failed to delete offer"
+    throw new Error(message)
+  }
+
+  return response
+}
