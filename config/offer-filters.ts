@@ -1,5 +1,7 @@
 import { ResourceFilterField } from "@/components/ui/ResourceFilters"
 import type { OfferQueryInput } from "@/types/Offer.types"
+import { CreateOfferFormValues } from "@/validations/offer"
+import { FileText, Languages, Palette, Percent, Settings2 } from "lucide-react"
 
 type CreateOfferFiltersOptions = {
   filters: OfferQueryInput
@@ -68,3 +70,36 @@ export const DEFAULT_FILTERS: OfferQueryInput = {
 }
 
 export const FILTER_KEYS: (keyof OfferQueryInput)[] = ["isActive", "showBanner", "sort", "order"]
+
+export const stepConfig = [
+  {
+    id: "basicInformation",
+    icon: FileText,
+  },
+  {
+    id: "descriptions",
+    icon: Languages,
+  },
+  {
+    id: "discountDetails",
+    icon: Percent,
+  },
+  {
+    id: "bannerCustomization",
+    icon: Palette,
+  },
+  {
+    id: "visibilityStatus",
+    icon: Settings2,
+  },
+] as const
+
+export const TOTAL_STEPS = stepConfig.length
+
+export const stepFields: Record<number, (keyof CreateOfferFormValues)[]> = {
+  1: ["arName", "enName"],
+  2: ["arDescription", "enDescription"],
+  3: ["percentage", "startDate", "endDate"],
+  4: ["arBannerText", "enBannerText", "bannerBackgroundColor", "bannerTextColor"],
+  5: [],
+}

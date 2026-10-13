@@ -19,15 +19,23 @@ const percentageSchema = z
     { message: "Percentage must be greater than 0 and less than or equal to 100" }
   )
 
+const optionalTrimmedString = (max: number) =>
+  z
+    .string()
+    .trim()
+    .max(max)
+    .optional()
+    .transform((value) => (value === "" ? undefined : value))
+
 export const createOfferSchema = z.compile(
   z
     .object({
       arName: z.string().trim().min(1).max(150),
-      arDescription: z.string().trim().max(1000).optional(),
-      arBannerText: z.string().trim().max(255).optional(),
       enName: z.string().trim().min(1).max(150),
-      enDescription: z.string().trim().max(1000).optional(),
-      enBannerText: z.string().trim().max(255).optional(),
+      arDescription: optionalTrimmedString(1000),
+      arBannerText: optionalTrimmedString(255),
+      enDescription: optionalTrimmedString(1000),
+      enBannerText: optionalTrimmedString(255),
       percentage: percentageSchema,
       startDate: z.coerce.date(),
       endDate: z.coerce.date(),
@@ -98,7 +106,7 @@ export const updateOfferShowBannerSchema = z.compile(
 export const offerQuerySchema = z.compile(
   z.object({
     page: z.coerce.number().int().min(1).default(1),
-    limit: z.coerce.number().int().min(1).max(100).default(10),
+    limit: z.coerce.number().int().min(1).max(10).default(10),
     isActive: z
       .union([z.boolean(), z.enum(["true", "false"])])
       .transform((v) => v === true || v === "true")
@@ -116,3 +124,7 @@ export type CreateOfferInput = z.infer<typeof createOfferSchema>
 export type UpdateOfferInput = z.infer<typeof updateOfferSchema>
 export type UpdateOfferStatusInput = z.infer<typeof updateOfferStatusSchema>
 export type UpdateOfferShowBannerInput = z.infer<typeof updateOfferShowBannerSchema>
+export type CreateOfferFormValues = z.input<typeof createOfferSchema>;
+export type CreateOfferPayload = z.output<typeof createOfferSchema>;
+export type UpdateOfferFormValues = z.input<typeof updateOfferSchema>;
+export type UpdateOfferPayload = z.output<typeof updateOfferSchema>;

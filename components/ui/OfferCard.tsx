@@ -4,14 +4,7 @@ import { Offer } from "@/types/Offer.types";
 import { Card, CardContent, CardFooter, CardHeader } from "./card";
 import { useLocale, useTranslations } from "next-intl";
 import { Button } from "./button";
-import {
-    Pencil,
-    CalendarDays,
-    Percent,
-    Megaphone,
-    Clock,
-    Palette,
-} from "lucide-react";
+import { Pencil, CalendarDays, Percent, Megaphone, Clock, Palette } from "lucide-react";
 import { formatDate } from "@/functions/format-date";
 import { useRouter } from "next/navigation";
 import DeleteButton from "./DeleteButton";

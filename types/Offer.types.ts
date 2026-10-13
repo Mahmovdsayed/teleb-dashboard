@@ -43,6 +43,11 @@ export type OfferResponse = {
   error?: string | { message?: string }
 }
 
+export type OffersResult = {
+  data: Offer[]
+  total: number
+}
+
 export type OfferQueryInput = {
   page?: number
   limit?: number

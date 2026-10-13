@@ -25,7 +25,6 @@
       "unknown": "An unexpected error occurred"
     }
   },
-
   "dashboard": {
     "brand": "Teleb Furniture",
     "metadata": {
@@ -80,7 +79,10 @@
         "emptyTitle": "No collections yet",
         "emptyDescription": "Add a collection to organize related products.",
         "formDescription": "Choose a clear collection name and describe which products it represents. This helps keep related items organized in your catalog.",
-        "form": { "title": "Add New Collection", "description": "Create a collection to organize related furniture products." },
+        "form": {
+          "title": "Add New Collection",
+          "description": "Create a collection to organize related furniture products."
+        },
         "updateForm": {
           "title": "Update Collection",
           "description": "Edit the collection details to keep your furniture catalog organized."
@@ -102,7 +104,11 @@
             "description": "Enter only the icon name from Lucide, such as 'sofa'. Do not include JSX tags like <Sofa />. Browse available icons at lucide.dev."
           }
         },
-        "actions": { "back": "Back to Collections", "submit": "Save Changes", "loading": "Saving..." }
+        "actions": {
+          "back": "Back to Collections",
+          "submit": "Save Changes",
+          "loading": "Saving..."
+        }
       },
       "banners": {
         "title": "Banners",
@@ -118,7 +124,28 @@
         "listDescription": "Create and manage promotional offers, set discount percentages, schedule validity dates, and customize promotional banners.",
         "emptyTitle": "No offers yet",
         "emptyDescription": "Create an offer to promote your products.",
-
+        "steps": {
+          "basicInformation": {
+            "title": "Basic Information",
+            "description": "Names in Arabic and English"
+          },
+          "descriptions": {
+            "title": "Descriptions",
+            "description": "Arabic and English descriptions"
+          },
+          "discountDetails": {
+            "title": "Discount Details",
+            "description": "Percentage and validity period"
+          },
+          "bannerCustomization": {
+            "title": "Banner Customization",
+            "description": "Banner text and colors"
+          },
+          "visibilityStatus": {
+            "title": "Visibility & Status",
+            "description": "Activation and banner visibility"
+          }
+        },
         "filters": {
           "title": "Filter offers",
           "reset": "Reset filters",
@@ -154,51 +181,68 @@
         "fields": {
           "arName": {
             "label": "Arabic Name",
-            "placeholder": "Enter offer name in Arabic"
+            "placeholder": "Enter offer name in Arabic",
+            "description": "Enter the offer name in Arabic as it will appear to users."
           },
           "enName": {
             "label": "English Name",
-            "placeholder": "Enter offer name in English"
+            "placeholder": "Enter offer name in English",
+            "description": "Enter the offer name in English as it will appear to users."
           },
           "arDescription": {
             "label": "Arabic Description",
-            "placeholder": "Enter offer description in Arabic"
+            "placeholder": "Enter offer description in Arabic",
+            "description": "Write a short description of the offer in Arabic. This field is optional."
           },
           "enDescription": {
             "label": "English Description",
-            "placeholder": "Enter offer description in English"
+            "placeholder": "Enter offer description in English",
+            "description": "Write a short description of the offer in English. This field is optional."
           },
           "arBannerText": {
             "label": "Arabic Banner Text",
-            "placeholder": "Enter banner text in Arabic"
+            "placeholder": "Enter banner text in Arabic",
+            "description": "Text shown on the promotional banner in Arabic. Optional."
           },
           "enBannerText": {
             "label": "English Banner Text",
-            "placeholder": "Enter banner text in English"
+            "placeholder": "Enter banner text in English",
+            "description": "Text shown on the promotional banner in English. Optional."
           },
           "percentage": {
             "label": "Discount Percentage",
-            "placeholder": "Enter discount percentage"
+            "placeholder": "Enter discount percentage",
+            "description": "Enter a number between 1 and 100. E.g., type 20 for a 20% discount."
           },
           "startDate": {
-            "label": "Start Date"
+            "label": "Start Date",
+            "placeholder": "Pick a start date",
+            "description": "Set the offer start date. Past dates cannot be selected."
           },
           "endDate": {
-            "label": "End Date"
+            "label": "End Date",
+            "placeholder": "Pick an end date",
+            "description": "Set the offer end date. It must be after the start date."
           },
           "isActive": {
             "label": "Active Offer",
-            "description": "Enable or disable this offer."
+            "description": "Enable or disable this offer.",
+            "hint": "Enable this to make the offer visible and available to users immediately after saving."
           },
           "showBanner": {
             "label": "Show Banner",
-            "description": "Display a promotional banner for this offer."
+            "description": "Display a promotional banner for this offer.",
+            "hint": "Enable this to display the promotional banner configured in the previous step."
           },
           "bannerBackgroundColor": {
-            "label": "Banner Background Color"
+            "label": "Banner Background Color",
+            "placeholder": "#2563eb",
+            "description": "Enter the background color in hex format. E.g. #2563eb"
           },
           "bannerTextColor": {
-            "label": "Banner Text Color"
+            "label": "Banner Text Color",
+            "placeholder": "#ffffff",
+            "description": "Enter the text color in hex format. E.g. #ffffff"
           }
         },
         "actions": {
@@ -206,7 +250,13 @@
           "create": "Create Offer",
           "creating": "Creating...",
           "update": "Save Changes",
-          "updating": "Saving..."
+          "updating": "Saving...",
+          "next": "Next",
+          "previous": "Previous"
+        },
+        "bannerPreview": {
+          "label": "Banner Preview",
+          "empty": "Banner text appears here"
         }
       },
       "messages": {
@@ -217,14 +267,12 @@
       }
     }
   },
-
   "metadata": {
     "login": {
       "title": "Sign In to Your Teleb Furniture Account",
       "description": "Sign in to your Teleb Furniture account to access your dashboard, manage your furniture products, and manage your account securely."
     }
   },
-
   "LanguageSwitcher": {
     "label": "Switch language"
   }

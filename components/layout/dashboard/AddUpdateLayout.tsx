@@ -10,16 +10,31 @@ interface IProps {
     title: string
     desc: string
     children: React.ReactNode
-    loading: boolean
+    loading?: boolean
     href: string
     backButtonTitle: string
-    buttonLoding: string
-    buttonSubmit: string
-    onSubmit: () => void
+    buttonLoding?: string
+    buttonSubmit?: string
+    onSubmit?: () => void
+    stepperMode?: boolean
 }
 
-const AddUpdateLayout = ({ onSubmit, title, desc, children, loading, href, backButtonTitle, buttonLoding, buttonSubmit }: IProps) => {
+const AddUpdateLayout = ({ onSubmit, title, desc, children, loading, href, backButtonTitle, buttonLoding, buttonSubmit, stepperMode }: IProps) => {
     const { push } = useRouter();
+
+    if (stepperMode) {
+        return (
+            <div>
+                <h1 className="mt-4 text-sm font-semibold">{title}</h1>
+                <p className="text-xs text-muted-foreground">
+                    {desc}
+                </p>
+                <div className="my-6">
+                    {children}
+                </div>
+            </div>
+        );
+    }
 
     return <>
         <div>
@@ -30,7 +45,7 @@ const AddUpdateLayout = ({ onSubmit, title, desc, children, loading, href, backB
             <div className="my-8 flex items-center justify-center">
                 <form
                     onSubmit={onSubmit}
-                    className="flex w-full max-w-lg flex-col items-center justify-center gap-4 px-4"
+                    className="flex w-full max-w-lg mx-auto flex-col items-center justify-center gap-4"
                 >
                     {children}
                     <div className="mt-4 grid w-full grid-cols-2 gap-2">
