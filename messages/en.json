@@ -115,10 +115,99 @@
       "offers": {
         "title": "Offers",
         "singular": "offer",
-        "listDescription": "Review and manage the promotional offers available in your store. Create offers and update their information as promotions change.",
+        "listDescription": "Create and manage promotional offers, set discount percentages, schedule validity dates, and customize promotional banners.",
         "emptyTitle": "No offers yet",
-        "emptyDescription": "Add an offer to promote products in your store.",
-        "formDescription": "Give this offer a clear name and describe its purpose so it is easy to recognize and manage."
+        "emptyDescription": "Create an offer to promote your products.",
+
+        "filters": {
+          "title": "Filter offers",
+          "reset": "Reset filters",
+          "status": "Offer status",
+          "allStatuses": "All statuses",
+          "active": "Active",
+          "inactive": "Inactive",
+          "banner": "Banner visibility",
+          "allBanners": "All banners",
+          "shown": "Shown",
+          "hidden": "Hidden",
+          "sortBy": "Sort by",
+          "createdAt": "Date created",
+          "startDate": "Start date",
+          "endDate": "End date",
+          "percentage": "Discount",
+          "order": "Sort order",
+          "ascending": "Oldest / lowest first",
+          "descending": "Newest / highest first",
+          "updating": "Updating offers...",
+          "discount": "discount",
+          "emptyTitle": "No offers found",
+          "emptyDescription": "Try changing your filters or create a new offer."
+        },
+        "form": {
+          "title": "Add New Offer",
+          "description": "Set up a promotional offer with a discount, validity period, and optional banner."
+        },
+        "updateForm": {
+          "title": "Update Offer",
+          "description": "Edit the offer details, discount, schedule, and banner settings."
+        },
+        "fields": {
+          "arName": {
+            "label": "Arabic Name",
+            "placeholder": "Enter offer name in Arabic"
+          },
+          "enName": {
+            "label": "English Name",
+            "placeholder": "Enter offer name in English"
+          },
+          "arDescription": {
+            "label": "Arabic Description",
+            "placeholder": "Enter offer description in Arabic"
+          },
+          "enDescription": {
+            "label": "English Description",
+            "placeholder": "Enter offer description in English"
+          },
+          "arBannerText": {
+            "label": "Arabic Banner Text",
+            "placeholder": "Enter banner text in Arabic"
+          },
+          "enBannerText": {
+            "label": "English Banner Text",
+            "placeholder": "Enter banner text in English"
+          },
+          "percentage": {
+            "label": "Discount Percentage",
+            "placeholder": "Enter discount percentage"
+          },
+          "startDate": {
+            "label": "Start Date"
+          },
+          "endDate": {
+            "label": "End Date"
+          },
+          "isActive": {
+            "label": "Active Offer",
+            "description": "Enable or disable this offer."
+          },
+          "showBanner": {
+            "label": "Show Banner",
+            "description": "Display a promotional banner for this offer."
+          },
+          "bannerBackgroundColor": {
+            "label": "Banner Background Color"
+          },
+          "bannerTextColor": {
+            "label": "Banner Text Color"
+          }
+        },
+        "actions": {
+          "back": "Back to Offers",
+          "create": "Create Offer",
+          "creating": "Creating...",
+          "update": "Save Changes",
+          "updating": "Saving..."
+        }
       },
       "messages": {
         "title": "Messages",
