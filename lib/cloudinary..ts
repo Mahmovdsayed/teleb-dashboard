@@ -1,5 +1,6 @@
 import { v2 as cloudinary } from "cloudinary"
 import { fileToBuffer, isValidFileSize, isValidFileType } from "./file-type"
+import { BASE_FOLDER, IMAGE_EXTENSIONS, MAX_IMAGE_SIZE } from "@/constant/image-constants"
 
 cloudinary.config({
   cloud_name: Bun.env.CLOUDINARY_CLOUD_NAME,
@@ -7,10 +8,6 @@ cloudinary.config({
   api_secret: Bun.env.CLOUDINARY_API_SECRET,
   secure: true,
 })
-
-const IMAGE_EXTENSIONS = ["jpg", "png", "webp"]
-const MAX_IMAGE_SIZE = 5 * 1024 * 1024
-const BASE_FOLDER = "teleb"
 
 export const uploadImageToCloudinary = async (image: File, folderName: string, size: { width: number; height: number }): Promise<{ imageUrl: string; publicId: string }> => {
   if (!isValidFileSize(image, MAX_IMAGE_SIZE)) throw new Error("Image is too large")
@@ -61,7 +58,6 @@ export const updateImageOnCloudinary = async (
   folderName: string,
   size: { width: number; height: number }
 ): Promise<{ imageUrl: string; publicId: string }> => {
-    
   const uploaded = await uploadImageToCloudinary(newImage, folderName, size)
 
   if (oldPublicId && oldPublicId !== uploaded.publicId) {
