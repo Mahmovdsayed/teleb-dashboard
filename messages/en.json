@@ -52,6 +52,8 @@
     },
     "resources": {
       "add": "Add",
+      "imagesCount": "{count, plural, one {# image} other {# images}}",
+      "noImages": "No images",
       "edit": "Edit",
       "back": "Back to list",
       "delete": "Delete",
@@ -113,10 +115,45 @@
       "banners": {
         "title": "Banners",
         "singular": "banner",
-        "listDescription": "Manage the banners customers see in your store. Create and update banner information to keep featured content current.",
+        "listDescription": "Manage the promotional banners displayed in your store. Upload images, arrange their order, and keep your storefront content up to date.",
         "emptyTitle": "No banners yet",
-        "emptyDescription": "Add a banner to feature content in your store.",
-        "formDescription": "Add a recognizable name and a short description for this banner so your team can identify its purpose."
+        "emptyDescription": "Upload your first banner image to feature promotions and content in your store.",
+        "formDescription": "Upload banner images with a recommended size of 1920 × 1000 pixels. Drag and drop images to arrange their display order.",
+        "form": {
+          "title": "Add New Banner",
+          "description": "Upload and arrange banner images for your storefront."
+        },
+        "updateForm": {
+          "title": "Update Banner",
+          "description": "Manage your banner images and adjust their display order."
+        },
+        "fields": {
+          "title": {
+            "label": "Banner Title",
+            "placeholder": "Enter a banner title",
+            "description": "Enter a title to help identify this banner in your dashboard."
+          },
+          "images": {
+            "label": "Banner Images",
+            "description": "Upload one or more images in 1920 × 1000 pixels for the best display quality.",
+            "upload": "Upload Images",
+            "uploading": "Uploading images...",
+            "dropzone": "Drag and drop images here, or click to browse",
+            "requirements": "Recommended size: 1920 × 1000 pixels",
+            "reorder": "Drag images to change their display order",
+            "remove": "Remove image",
+            "empty": "No images uploaded yet",
+            "uploadError": "Failed to upload image. Please try again.",
+            "invalidSize": "Image dimensions should be 1920 × 1000 pixels."
+          }
+        },
+        "actions": {
+          "back": "Back to Banners",
+          "submit": "Create Banner",
+          "loading": "Creating...",
+          "update": "Save Changes",
+          "updating": "Saving..."
+        }
       },
       "offers": {
         "title": "Offers",
@@ -275,5 +312,31 @@
   },
   "LanguageSwitcher": {
     "label": "Switch language"
+  },
+  "uploader": {
+    "title": "Upload images",
+    "dropzoneTitle": "Drop image files to upload",
+    "dropzoneDesc": "JPG, PNG, or WEBP up to {maxSize}MB",
+    "filesReady": "{ready} of {total} images ready",
+    "cloudNotice": "Uploading images to Cloudinary storage... this may take a moment, please do not close this page.",
+    "cloudUploaded": "Uploaded to Cloudinary",
+    "uploading": "Uploading to cloud...",
+    "processing": "Processing image...",
+    "success": "Uploaded",
+    "error": "Upload failed",
+    "retry": "Retry upload",
+    "remove": "Remove image",
+    "reset": "Reset upload queue",
+    "moveUp": "Move up",
+    "moveDown": "Move down",
+    "order": "Order",
+    "preview": "Click to preview",
+    "close": "Close preview",
+    "errors": {
+      "maxFiles": "You can only upload up to {maxFiles} images",
+      "fileTooLarge": "Image \"{name}\" exceeds maximum allowed size of {maxSize}MB",
+      "unsupportedType": "Image \"{name}\" is not a supported format. Please use JPG, PNG, or WEBP.",
+      "uploadFailed": "Failed to upload image. Please try again."
+    }
   }
 }

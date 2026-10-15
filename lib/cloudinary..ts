@@ -3,13 +3,17 @@ import { fileToBuffer, isValidFileSize, isValidFileType } from "./file-type"
 import { BASE_FOLDER, IMAGE_EXTENSIONS, MAX_IMAGE_SIZE } from "@/constant/image-constants"
 
 cloudinary.config({
-  cloud_name: Bun.env.CLOUDINARY_CLOUD_NAME,
-  api_key: Bun.env.CLOUDINARY_API_KEY,
-  api_secret: Bun.env.CLOUDINARY_API_SECRET,
+  cloud_name: (typeof Bun !== "undefined" ? Bun.env.CLOUDINARY_CLOUD_NAME : undefined) || process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: (typeof Bun !== "undefined" ? Bun.env.CLOUDINARY_API_KEY : undefined) || process.env.CLOUDINARY_API_KEY,
+  api_secret: (typeof Bun !== "undefined" ? Bun.env.CLOUDINARY_API_SECRET : undefined) || process.env.CLOUDINARY_API_SECRET,
   secure: true,
 })
 
-export const uploadImageToCloudinary = async (image: File, folderName: string, size: { width: number; height: number }): Promise<{ imageUrl: string; publicId: string }> => {
+export const uploadImageToCloudinary = async (
+  image: File,
+  folderName: string,
+  size?: { width?: number; height?: number }
+): Promise<{ imageUrl: string; publicId: string }> => {
   if (!isValidFileSize(image, MAX_IMAGE_SIZE)) throw new Error("Image is too large")
 
   const { valid, detectedType } = await isValidFileType(image, IMAGE_EXTENSIONS, true)
@@ -19,19 +23,21 @@ export const uploadImageToCloudinary = async (image: File, folderName: string, s
   const mime = `image/${detectedType === "jpg" ? "jpeg" : detectedType}`
   const dataURI = `data:${mime};base64,${buffer.toString("base64")}`
 
+  const transformation = size?.width && size?.height ? [
+    {
+      width: size.width,
+      height: size.height,
+      crop: "fill",
+      gravity: "auto",
+      quality: 100,
+    },
+  ] : undefined
+
   const result = await cloudinary.uploader.upload(dataURI, {
     folder: `${BASE_FOLDER}/${folderName}`,
     allowed_formats: IMAGE_EXTENSIONS,
     resource_type: "image",
-    transformation: [
-      {
-        width: size.width,
-        height: size.height,
-        crop: "fill",
-        gravity: "auto",
-        quality: 100,
-      },
-    ],
+    transformation,
     format: "webp",
   })
 
@@ -56,7 +62,7 @@ export const updateImageOnCloudinary = async (
   newImage: File,
   oldPublicId: string | null | undefined,
   folderName: string,
-  size: { width: number; height: number }
+  size?: { width?: number; height?: number }
 ): Promise<{ imageUrl: string; publicId: string }> => {
   const uploaded = await uploadImageToCloudinary(newImage, folderName, size)
 

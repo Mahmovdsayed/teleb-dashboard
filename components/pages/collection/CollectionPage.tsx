@@ -26,7 +26,7 @@ const CollectionPage = () => {
             />
             {data?.length ? (
                 <div className="grid grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-3">
-                    {data.map((collection) => (
+                    {data.map((collection: Collection) => (
                         <CollectionCard
                             refetch={refetch}
                             collection={collection}

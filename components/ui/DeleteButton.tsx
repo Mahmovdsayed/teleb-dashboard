@@ -6,9 +6,7 @@ import z from "zod";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Loader2, Trash2 } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { toast } from "./toast";
-
+import { useTranslations } from "next-intl"
 
 interface IProps {
     isIcon: boolean;
@@ -26,28 +24,12 @@ const DeleteButton = ({ isIcon, title, serviceFunc, refetch, warningMessage, cla
     const { onSubmit, loading } = useFormHandler({
         schema: z.object({}),
         service: () => serviceFunc(),
-        onSuccess: (data) => {
+        onSuccess: () => {
             refetch();
-            toast.add({
-                title: data?.message || `${title} successfully`,
-                type: "success",
-            });
-
             setOpen(false);
         },
-        onError: (error) => {
+        onError: () => {
             setOpen(false)
-            const message =
-                typeof error === "string"
-                    ? error
-                    : error instanceof Error
-                        ? error.message
-                        : error?.message || "Something went wrong";
-
-            toast.add({
-                title: message,
-                type: "error",
-            });
         },
     });
 

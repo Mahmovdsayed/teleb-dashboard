@@ -24,3 +24,8 @@ export const offerInitialValues = {
   bannerBackgroundColor: "#2563eb",
   bannerTextColor: "#ffffff",
 }
+
+export const bannerInitialValues = {
+  title: "",
+  images: [] as { url: string; publicId: string; order: number }[],
+}

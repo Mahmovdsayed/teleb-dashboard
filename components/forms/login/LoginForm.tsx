@@ -7,7 +7,6 @@ import { useFormHandler } from "@/hooks/useFormHandler";
 import { loginSchema } from "@/validations/login";
 import FormField from "../FormField";
 import SubmitButton from "../SubmitButton";
-import { toast } from "@/components/ui/toast";
 import { useRouter } from "next/navigation";
 import { API_BASE_URL } from "@/constant/constant";
 import { loginInitialValues } from "@/constant/initial-values";
@@ -29,11 +28,9 @@ export default function LoginForm() {
         onSuccess: (data) => {
             setUser(data.data.user)
             push("/")
-            toast.add({ title: data.message, type: "success" })
         },
         onError: (error) => {
             reset()
-            toast.add({ title: error.message, type: "error" })
         },
     });
 

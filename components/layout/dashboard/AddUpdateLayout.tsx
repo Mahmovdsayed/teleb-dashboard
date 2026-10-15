@@ -25,8 +25,8 @@ const AddUpdateLayout = ({ onSubmit, title, desc, children, loading, href, backB
     if (stepperMode) {
         return (
             <div>
-                <h1 className="mt-4 text-sm font-semibold">{title}</h1>
-                <p className="text-xs text-muted-foreground">
+                <h1 className="mt-4 text-sm font-semibold text-center">{title}</h1>
+                <p className="text-xs text-muted-foreground text-center">
                     {desc}
                 </p>
                 <div className="my-6">
@@ -38,8 +38,8 @@ const AddUpdateLayout = ({ onSubmit, title, desc, children, loading, href, backB
 
     return <>
         <div>
-            <h1 className="mt-4 text-sm font-semibold">{title}</h1>
-            <p className="text-xs text-muted-foreground">
+            <h1 className="mt-4 text-sm font-semibold text-center">{title}</h1>
+            <p className="text-xs text-muted-foreground text-center">
                 {desc}
             </p>
             <div className="my-8 flex items-center justify-center">
