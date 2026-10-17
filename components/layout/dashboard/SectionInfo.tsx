@@ -7,8 +7,8 @@ import { useRouter } from "next/navigation";
 interface IProps {
     title: string;
     desc: string;
-    href: string;
-    buttonTitle: string;
+    href?: string;
+    buttonTitle?: string;
 }
 
 const SectionInfo = ({ title, desc, href, buttonTitle }: IProps) => {
@@ -19,9 +19,12 @@ const SectionInfo = ({ title, desc, href, buttonTitle }: IProps) => {
                 <h1 className="font-semibold">{title}</h1>
                 <p className="text-muted-foreground text-xs lg:text-sm">{desc}</p>
             </div>
-            <div>
-                <Button className={"w-full lg:w-fit"} onClick={() => push(href)}><Plus /> {buttonTitle}</Button>
-            </div>
+            {
+                buttonTitle && href &&
+                <div>
+                    <Button className={"w-full lg:w-fit"} onClick={() => push(href)}><Plus /> {buttonTitle}</Button>
+                </div>
+            }
         </div>
     </>;
 };

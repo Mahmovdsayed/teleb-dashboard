@@ -300,7 +300,59 @@
         "title": "Messages",
         "listDescription": "Review messages sent by your customers and keep track of incoming questions or feedback in one place.",
         "emptyTitle": "No messages yet",
-        "emptyDescription": "Customer messages will appear here."
+        "emptyDescription": "Customer messages will appear here.",
+        "view": "View Message",
+        "status": {
+          "read": "Read",
+          "unread": "New"
+        },
+        "filters": {
+          "title": "Filter messages",
+          "reset": "Reset filters",
+          "status": "Message status",
+          "allStatuses": "All statuses",
+          "read": "Read",
+          "unread": "Unread / Pending",
+          "priority": "AI Priority",
+          "allPriorities": "All priorities",
+          "high": "High",
+          "medium": "Medium",
+          "low": "Low",
+          "sortBy": "Sort by",
+          "createdAt": "Date received",
+          "fullName": "Sender name",
+          "order": "Sort order",
+          "ascending": "Oldest first",
+          "descending": "Newest first",
+          "emptyTitle": "No messages found",
+          "emptyDescription": "Try changing your filter settings."
+        },
+        "priorities": {
+          "high": "High",
+          "highDesc": "Requires immediate attention. Includes damaged or defective furniture, serious complaints, delayed or failed deliveries, and urgent order issues.",
+          "medium": "Medium",
+          "mediumDesc": "Requires follow-up but is not urgent. Includes order status questions, pricing inquiries, product availability, and delivery scheduling.",
+          "low": "Low",
+          "lowDesc": "No immediate action required. Includes general product questions, suggestions, compliments, and non-urgent feedback."
+        },
+        "fields": {
+          "fullName": "Sender Name",
+          "email": "Email Address",
+          "phone": "Phone Number",
+          "subject": "Subject",
+          "message": "Message Content",
+          "priority": "AI Priority",
+          "status": "Status",
+          "noContent": "No message content provided."
+        },
+        "viewDialog": {
+          "title": "Message Details",
+          "subtitle": "Review full customer message and contact details",
+          "markAsRead": "Mark as Read",
+          "confirmMarkAsRead": "Confirm Mark as Read",
+          "markAsReadHint": "When marked as read, this cannot be undone. Marking it as read allows this customer to send new messages (as pending messages block new submissions).",
+          "confirmWarning": "Warning: Marking as read cannot be undone. The customer will now be able to submit new messages."
+        }
       }
     }
   },
