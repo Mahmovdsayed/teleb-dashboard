@@ -11,24 +11,31 @@ export default async function proxy(request: NextRequest) {
   if (!locale) return intlMiddleware(request)
 
   const pathnameWithoutLocale = pathname === `/${locale}` ? "/" : pathname.slice(`/${locale}`.length)
-  const isDashboard = pathnameWithoutLocale === "/"
-  const isLogin = pathnameWithoutLocale === "/login"
-
-  if (!isDashboard && !isLogin) return intlMiddleware(request)
+  const isLogin = pathnameWithoutLocale === "/login" || pathnameWithoutLocale.startsWith("/login/")
 
   const token = request.cookies.get("access_token")?.value
   const result = token ? await verifyAccessToken(token) : null
+  const isAuthenticated = Boolean(result?.valid)
 
-  if (token && !result?.valid) {
+  if (token && !isAuthenticated) {
+    if (isLogin) {
+      const response = intlMiddleware(request)
+      response.cookies.delete("access_token")
+      return response
+    }
+
     const response = NextResponse.redirect(new URL(`/${locale}/login`, request.url))
     response.cookies.delete("access_token")
     return response
   }
 
-  const user = token ? await verifyAccessToken(token) : null
+  if (!isAuthenticated && !isLogin) {
+    return NextResponse.redirect(new URL(`/${locale}/login`, request.url))
+  }
 
-  if (isDashboard && !user) return NextResponse.redirect(new URL(`/${locale}/login`, request.url))
-  if (isLogin && user) return NextResponse.redirect(new URL(`/${locale}`, request.url))
+  if (isAuthenticated && isLogin) {
+    return NextResponse.redirect(new URL(`/${locale}`, request.url))
+  }
 
   return intlMiddleware(request)
 }
