@@ -325,7 +325,8 @@
           "ascending": "الأقدم أولاً",
           "descending": "الأحدث أولاً",
           "emptyTitle": "لم يتم العثور على رسائل",
-          "emptyDescription": "جرّب تغيير إعدادات الفلاتر."
+          "emptyDescription": "جرّب تغيير إعدادات الفلاتر.",
+          "searchPlaceholder": "بحث بالاسم، البريد، الهاتف، أو الموضوع..."
         },
         "priorities": {
           "high": "عالية",

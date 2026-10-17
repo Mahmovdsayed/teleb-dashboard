@@ -1,6 +1,6 @@
 "use client"
 
-import { useQuery, type UseQueryResult, type QueryKey } from "@tanstack/react-query"
+import { useQuery, type UseQueryResult, type QueryKey, type UseQueryOptions, keepPreviousData } from "@tanstack/react-query"
 
 const ONE_DAY = 1000 * 60 * 60 * 24
 
@@ -14,6 +14,7 @@ type AppQueryArgs<TData> = {
   refetchOnWindowFocus?: boolean
   gcTime?: number
   initialData?: TData
+  placeholderData?: UseQueryOptions<TData, Error, TData>["placeholderData"]
 }
 
 export function useAppQuery<TData>({
@@ -26,8 +27,9 @@ export function useAppQuery<TData>({
   enabled = true,
   retry = 0,
   initialData,
+  placeholderData,
 }: AppQueryArgs<TData>): UseQueryResult<TData> {
-  return useQuery<TData, Error, TData>({
+  return useQuery({
     queryKey,
     queryFn,
     enabled,
@@ -38,5 +40,8 @@ export function useAppQuery<TData>({
     refetchOnWindowFocus,
     retry,
     initialData,
+    placeholderData,
   })
 }
+
+export { keepPreviousData }

@@ -2,7 +2,7 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import SectionInfo from "@/components/layout/dashboard/SectionInfo";
-import { useAppQuery } from "@/hooks/useAppQuery";
+import { useAppQuery, keepPreviousData } from "@/hooks/useAppQuery";
 import { getMessages } from "@/services/message";
 import { Message, MessageQueryInput, MessagesResult } from "@/types/Message.types";
 import { useResourceFilters } from "@/hooks/useResourceFilters";
@@ -14,6 +14,7 @@ import EmptyState from "@/components/ui/EmptyState";
 import MessageCard from "@/components/ui/MessageCard";
 import MessageSkeleton, { MessageCardSkeleton } from "@/components/skeletons/MessageSkeleton";
 import AppPagination from "@/components/ui/AppPagination";
+import MessageSearchBar from "@/components/ui/MessageSearchBar";
 
 const MessagePage = () => {
     const t = useTranslations("dashboard.resources");
@@ -31,10 +32,13 @@ const MessagePage = () => {
 
     const { data, isLoading, isFetching, refetch } = useAppQuery<MessagesResult>({
         queryFn: () => getMessages(filters, locale),
-        queryKey: ["messages", locale, filters]});
+        queryKey: ["messages", locale, filters],
+        placeholderData: keepPreviousData,
+    });
 
     const fields = createMessageFilters({ filters, updateFilter, tf });
-    if (isLoading) return <MessageSkeleton />;
+
+    if (isLoading && !data) return <MessageSkeleton />;
 
     const messages = data?.data ?? [];
     const total = data?.total ?? 0;
@@ -46,13 +50,22 @@ const MessagePage = () => {
                 desc={t("messages.listDescription")}
             />
 
-            <ResourceFilters
-                title={tf("title")}
-                resetLabel={tf("reset")}
-                hasFilters={hasFilters}
-                onReset={resetFilters}
-                fields={fields}
-            />
+            <div className="space-y-4">
+                <MessageSearchBar
+                    value={filters.search ?? ""}
+                    onChange={(search) => updateFilter("search", search || undefined)}
+                    placeholder={tf("searchPlaceholder")}
+                    isSearching={isFetching}
+                />
+
+                <ResourceFilters
+                    title={tf("title")}
+                    resetLabel={tf("reset")}
+                    hasFilters={hasFilters}
+                    onReset={resetFilters}
+                    fields={fields}
+                />
+            </div>
 
             <div className="space-y-6">
                 {isFetching ? (

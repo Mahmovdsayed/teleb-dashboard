@@ -6,7 +6,7 @@ export const getMessages = async (query: MessageQueryInput, locale: string): Pro
   const params = new URLSearchParams()
 
   Object.entries(query).forEach(([key, value]) => {
-    if (value !== undefined && value !== null) {
+    if (value !== undefined && value !== null && value !== "") {
       params.set(key, String(value))
     }
   })

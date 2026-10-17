@@ -325,7 +325,8 @@
           "ascending": "Oldest first",
           "descending": "Newest first",
           "emptyTitle": "No messages found",
-          "emptyDescription": "Try changing your filter settings."
+          "emptyDescription": "Try changing your filter settings.",
+          "searchPlaceholder": "Search by name, email, phone, or subject..."
         },
         "priorities": {
           "high": "High",

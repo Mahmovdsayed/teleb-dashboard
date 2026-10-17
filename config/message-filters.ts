@@ -66,6 +66,7 @@ export const DEFAULT_FILTERS: MessageQueryInput = {
   limit: 10,
   sort: "createdAt",
   order: "desc",
+  search: undefined,
 }
 
-export const FILTER_KEYS: (keyof MessageQueryInput)[] = ["isViewed", "priority", "sort", "order"]
+export const FILTER_KEYS: (keyof MessageQueryInput)[] = ["isViewed", "priority", "sort", "order", "search"]
