@@ -66,13 +66,246 @@
       "id": "المعرّف",
       "createTitle": "إضافة {resource} جديد",
       "editTitle": "تعديل {resource}",
+      "actions": {
+        "back": "العودة إلى القائمة",
+        "previous": "السابق",
+        "next": "التالي",
+        "create": "إنشاء",
+        "creating": "جارٍ الإنشاء...",
+        "update": "حفظ التعديلات",
+        "updating": "جارٍ الحفظ...",
+        "submit": "حفظ",
+        "loading": "جارٍ التحميل..."
+      },
       "products": {
+        "actions": {
+          "back": "العودة إلى المنتجات",
+          "create": "إنشاء المنتج",
+          "creating": "جارٍ إنشاء المنتج...",
+          "update": "حفظ التعديلات",
+          "updating": "جارٍ حفظ التعديلات...",
+          "next": "التالي",
+          "previous": "السابق"
+        },
         "title": "المنتجات",
         "singular": "منتج",
         "listDescription": "استعرض منتجات الأثاث في الكتالوج وأدرها من مكان واحد. أضف المنتجات وحدّث تفاصيلها وحافظ على تنظيم معلومات متجرك.",
         "emptyTitle": "لا توجد منتجات حتى الآن",
         "emptyDescription": "أضف أول منتج لبدء إنشاء الكتالوج.",
-        "formDescription": "أضف اسمًا واضحًا ووصفًا لهذا المنتج. تساعد هذه التفاصيل فريقك على العثور على المنتجات وإدارتها داخل الكتالوج."
+        "formDescription": "أضف اسمًا واضحًا ووصفًا لهذا المنتج. تساعد هذه التفاصيل فريقك على العثور على المنتجات وإدارتها داخل الكتالوج.",
+        "form": {
+          "title": "إضافة منتج جديد",
+          "description": "أنشئ منتج أثاث جديد وانشره داخل كتالوج متجرك بسهولة."
+        },
+        "updateForm": {
+          "title": "تعديل المنتج",
+          "description": "عدّل مواصفات المنتج والبيانات باللغتين العربية والإنجليزية ومعرض الصور."
+        },
+        "view": "عرض",
+        "viewOverview": "نظرة عامة والمواصفات",
+        "searchPlaceholder": "ابحث عن المنتجات بالاسم أو المعرّف أو الوسوم...",
+        "statusActive": "نشط",
+        "statusInactive": "غير نشط",
+        "bestSellerBadge": "الأكثر مبيعاً",
+        "customizableBadge": "قابل للتخصيص",
+        "yearsWarranty": "سنوات ضمان",
+        "dimensions": "الأبعاد",
+        "mainImage": "الصورة الرئيسية",
+        "noOffer": "بدون عرض ترويجي",
+        "updatedAt": "آخر تحديث",
+        "steps": {
+          "basicInfo": {
+            "title": "البيانات الأساسية",
+            "description": "المجموعة، العرض، الحالة والمواصفات"
+          },
+          "arContent": {
+            "title": "المحتوى العربي",
+            "description": "الاسم والوصف والمواد بالعربية"
+          },
+          "enContent": {
+            "title": "المحتوى الإنجليزي",
+            "description": "الاسم والوصف والمواد بالإنجليزية"
+          },
+          "tagsAndSeo": {
+            "title": "الوسوم والسيو",
+            "description": "كلمات البحث والوسوم وبيانات الميتا"
+          },
+          "images": {
+            "title": "معرض الصور",
+            "description": "رفع حتى 5 صور عالية الدقة"
+          }
+        },
+        "filters": {
+          "title": "تصفية المنتجات",
+          "reset": "إعادة ضبط التصفية",
+          "status": "الحالة",
+          "allStatuses": "جميع الحالات",
+          "active": "نشط",
+          "inactive": "غير نشط",
+          "collection": "المجموعة",
+          "allCollections": "جميع المجموعات",
+          "offer": "العرض الترويجي",
+          "allOffers": "جميع العروض",
+          "bestSeller": "الأكثر مبيعاً",
+          "all": "الكل",
+          "yes": "نعم",
+          "no": "لا",
+          "sortBy": "ترتيب حسب",
+          "createdAt": "تاريخ الإضافة",
+          "name": "اسم المنتج",
+          "order": "الاتجاه",
+          "descending": "الأحدث أولاً",
+          "ascending": "الأقدم أولاً",
+          "emptyTitle": "لم يتم العثور على منتجات مطابقة",
+          "emptyDescription": "جرّب تغيير كلمات البحث أو إعادة ضبط خيارات التصفية."
+        },
+        "fields": {
+          "collection": {
+            "label": "المجموعة",
+            "placeholder": "اختر المجموعة التابع لها المنتج",
+            "description": "المجموعة أو التصنيف الرئيسي للمنتج"
+          },
+          "offer": {
+            "label": "العرض الترويجي",
+            "placeholder": "اختر عرضاً ترويجياً سارياً (اختياري)",
+            "description": "تطبيق نسبة خصم أو حملة ترويجية خاصة"
+          },
+          "slug": {
+            "label": "المعرّف اللطيف (Slug)",
+            "placeholder": "مثال: modern-leather-sofa",
+            "description": "المعرّف الفريد للرابط باللغة الإنجليزية بدون مسافات"
+          },
+          "warranty": {
+            "label": "فترة الضمان (بالسنوات)",
+            "placeholder": "مثال: 3",
+            "description": "عدد سنوات الضمان المقدمة على المنتج"
+          },
+          "weight": {
+            "label": "الوزن / الكتلة",
+            "placeholder": "مثال: 45 كجم",
+            "description": "الوزن التقريبي للمنتج"
+          },
+          "status": {
+            "label": "حالة المنتج",
+            "hint": "المنتجات النشطة تظهر للعملاء في المتجر",
+            "description": "تفعيل أو تعطيل ظهور المنتج"
+          },
+          "isBestSeller": {
+            "label": "الأكثر مبيعاً",
+            "hint": "تمييز المنتج بشارة الأكثر مبيعاً",
+            "description": "تحديد المنتج كمنتج مميز وذو إقبال كبير"
+          },
+          "isCustomizable": {
+            "label": "قابل للتخصيص",
+            "hint": "إمكانية تفصيل المنتج بمقاسات أو أقمشة خاصة",
+            "description": "السماح للعميل بطلب تعديلات ومواصفات خاصة"
+          },
+          "arName": {
+            "label": "اسم المنتج بالعربية",
+            "placeholder": "أدخل اسم المنتج باللغة العربية",
+            "description": "الاسم الأساسي الذي يظهر للمستخدمين باللغة العربية"
+          },
+          "arSmallDescription": {
+            "label": "الملخص العربي القصير",
+            "placeholder": "ملخص تسويقي سريع في سطرين",
+            "description": "وصف موجز يظهر في البطاقات ونتائج البحث"
+          },
+          "arDescription": {
+            "label": "الوصف التفصيلي بالعربية",
+            "placeholder": "اكتب وصفاً مفصلاً للمنتج ومميزاته وجودته",
+            "description": "الوصف الكامل والشامل للمنتج"
+          },
+          "arMaterials": {
+            "label": "الخامات والمواد بالعربية",
+            "placeholder": "مثال: خشب زان أحمر، قماش كتان، معدن مطلي",
+            "description": "قائمة المواد والخامات مفصولة بفواصل"
+          },
+          "arFeatures": {
+            "label": "الميزات والمواصفات بالعربية",
+            "placeholder": "مثال: أرجل معدنية قوية، حشوة إسفنج كثيف، مقاوم للخدش",
+            "description": "الميزات البارزة مفصولة بفواصل"
+          },
+          "arHeight": {
+            "label": "الارتفاع",
+            "placeholder": "مثال: 85 سم",
+            "description": "الارتفاع الإجمالي للمنتج"
+          },
+          "arWidth": {
+            "label": "العرض / العمق",
+            "placeholder": "مثال: 210 × 95 سم",
+            "description": "أبعاد المنتج"
+          },
+          "enName": {
+            "label": "اسم المنتج بالإنجليزية",
+            "placeholder": "Enter product name in English",
+            "description": "الاسم باللغة الإنجليزية للمستخدمين الأجانب"
+          },
+          "enSmallDescription": {
+            "label": "الملخص القصير بالإنجليزية",
+            "placeholder": "Short punchy marketing summary",
+            "description": "ملخص تسويقي سريع بالإنجليزية"
+          },
+          "enDescription": {
+            "label": "الوصف التفصيلي بالإنجليزية",
+            "placeholder": "Write full detailed description of comfort and craftsmanship",
+            "description": "الوصف الكامل باللغة الإنجليزية"
+          },
+          "enMaterials": {
+            "label": "الخامات بالإنجليزية",
+            "placeholder": "e.g. Beech wood, Linen fabric, Steel legs",
+            "description": "قائمة الخامات باللغة الإنجليزية مفصولة بفواصل"
+          },
+          "enFeatures": {
+            "label": "الميزات بالإنجليزية",
+            "placeholder": "e.g. High resilience foam, Ergonomic backrest",
+            "description": "الميزات البارزة باللغة الإنجليزية مفصولة بفواصل"
+          },
+          "enHeight": {
+            "label": "الارتفاع (إنجليزي)",
+            "placeholder": "e.g. 85 cm",
+            "description": "الارتفاع الإجمالي"
+          },
+          "enWidth": {
+            "label": "العرض / العمق (إنجليزي)",
+            "placeholder": "e.g. 210 x 95 cm",
+            "description": "أبعاد المنتج"
+          },
+          "tags": {
+            "label": "وسوم البحث والكلمات المفتاحية",
+            "placeholder": "مثال: كنبة، صالون، حديث، فاخر، أثاث",
+            "description": "وسوم مفصولة بفواصل لتسهيل الفرز والبحث"
+          },
+          "metaTitleAr": {
+            "label": "عنوان صفحة السيو بالعربية",
+            "placeholder": "عنوان جذاب يظهر في محركات البحث",
+            "description": "عنوان الميتا لمحركات البحث"
+          },
+          "metaTitleEn": {
+            "label": "عنوان صفحة السيو بالإنجليزية",
+            "placeholder": "SEO page title in English",
+            "description": "عنوان الميتا باللغة الإنجليزية"
+          },
+          "metaDescriptionAr": {
+            "label": "وصف السيو بالعربية",
+            "placeholder": "وصف مختصر يظهر في نتائج بحث جوجل",
+            "description": "وصف الميتا لمحركات البحث"
+          },
+          "metaDescriptionEn": {
+            "label": "وصف السيو بالإنجليزية",
+            "placeholder": "Meta description appearing in search results",
+            "description": "وصف الميتا باللغة الإنجليزية"
+          },
+          "metaKeywords": {
+            "label": "الكلمات المفتاحية (Keywords)",
+            "placeholder": "مثال: أثاث طيب، غرف معيشة، كنب جلد",
+            "description": "كلمات مفتاحية مفصولة بفواصل"
+          },
+          "images": {
+            "label": "صور معرض المنتج",
+            "description": "ارفع حتى 5 صور عالية الدقة. الصورة الأولى ستكون الصورة الرئيسية في البطاقة والمتجر."
+          }
+        },
+        "switchViewLanguage": "معاينة اللغة الأخرى"
       },
       "collections": {
         "title": "المجموعات",

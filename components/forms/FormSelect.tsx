@@ -42,12 +42,16 @@ const FormSelect = ({
         field: { value, onChange, onBlur, ref },
     } = useController({ name, control, defaultValue })
 
+    const selectedOption = options.find(
+        (opt) => String(opt.value) === String(value)
+    )
+
     return (
         <Field>
             <FieldLabel htmlFor={name}>{label}</FieldLabel>
             <Select
-                key={value}
-                value={value ?? ""}
+                key={value !== undefined && value !== null ? String(value) : "empty"}
+                value={value !== undefined && value !== null ? String(value) : ""}
                 onValueChange={onChange}
             >
                 <SelectTrigger
@@ -56,7 +60,14 @@ const FormSelect = ({
                     onBlur={onBlur}
                     className={cn("w-full h-9 md:h-10 px-4 py-1 text-xs md:text-sm font-normal bg-input/50 hover:bg-input/70 border-transparent transition-colors", className)}
                 >
-                    <SelectValue placeholder={placeholder} />
+                    <SelectValue placeholder={placeholder}>
+                        {selectedOption ? (
+                            <div className="flex items-center gap-2">
+                                {selectedOption.icon}
+                                <span>{selectedOption.label}</span>
+                            </div>
+                        ) : undefined}
+                    </SelectValue>
                 </SelectTrigger>
                 <SelectContent className='rounded-xl'>
                     {options.map((option) => (

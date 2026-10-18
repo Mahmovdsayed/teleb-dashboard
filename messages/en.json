@@ -66,13 +66,246 @@
       "id": "ID",
       "createTitle": "Add New {resource}",
       "editTitle": "Edit {resource}",
+      "actions": {
+        "back": "Back to list",
+        "previous": "Previous",
+        "next": "Next",
+        "create": "Create",
+        "creating": "Creating...",
+        "update": "Save Changes",
+        "updating": "Saving...",
+        "submit": "Submit",
+        "loading": "Loading..."
+      },
       "products": {
+        "actions": {
+          "back": "Back to Products",
+          "create": "Create Product",
+          "creating": "Creating...",
+          "update": "Save Changes",
+          "updating": "Saving...",
+          "next": "Next",
+          "previous": "Previous"
+        },
         "title": "Products",
         "singular": "product",
         "listDescription": "Browse and manage the furniture products in your catalog. Create products, update their details, and keep your store information organized in one place.",
         "emptyTitle": "No products yet",
         "emptyDescription": "Add your first product to start building the catalog.",
-        "formDescription": "Add a clear name and description for this product. These details help your team identify and manage products in the catalog."
+        "formDescription": "Add a clear name and description for this product. These details help your team identify and manage products in the catalog.",
+        "form": {
+          "title": "Add New Product",
+          "description": "Create and publish a new furniture product to your store catalog."
+        },
+        "updateForm": {
+          "title": "Update Product",
+          "description": "Modify product specifications, bilingual translations, and media gallery."
+        },
+        "view": "View",
+        "viewOverview": "Overview & Specifications",
+        "searchPlaceholder": "Search products by name, slug, or keywords...",
+        "statusActive": "Active",
+        "statusInactive": "Inactive",
+        "bestSellerBadge": "Best Seller",
+        "customizableBadge": "Customizable",
+        "yearsWarranty": "Years Warranty",
+        "dimensions": "Dimensions",
+        "mainImage": "Main Image",
+        "noOffer": "No promotional offer",
+        "updatedAt": "Last updated",
+        "steps": {
+          "basicInfo": {
+            "title": "Basic Details",
+            "description": "Collection, offer, status & specs"
+          },
+          "arContent": {
+            "title": "Arabic Content",
+            "description": "Name, description & materials in Arabic"
+          },
+          "enContent": {
+            "title": "English Content",
+            "description": "Name, description & materials in English"
+          },
+          "tagsAndSeo": {
+            "title": "Tags & SEO",
+            "description": "Search tags, keywords & SEO metadata"
+          },
+          "images": {
+            "title": "Gallery Images",
+            "description": "Upload up to 5 high-res photos"
+          }
+        },
+        "filters": {
+          "title": "Filter Products",
+          "reset": "Reset Filters",
+          "status": "Status",
+          "allStatuses": "All Statuses",
+          "active": "Active",
+          "inactive": "Inactive",
+          "collection": "Collection",
+          "allCollections": "All Collections",
+          "offer": "Offer",
+          "allOffers": "All Offers",
+          "bestSeller": "Best Seller",
+          "all": "All",
+          "yes": "Yes",
+          "no": "No",
+          "sortBy": "Sort By",
+          "createdAt": "Date Created",
+          "name": "Product Name",
+          "order": "Order",
+          "descending": "Newest First",
+          "ascending": "Oldest First",
+          "emptyTitle": "No matching products found",
+          "emptyDescription": "Try adjusting your search criteria or resetting filters."
+        },
+        "fields": {
+          "collection": {
+            "label": "Collection",
+            "placeholder": "Select a collection",
+            "description": "The category or collection this product belongs to"
+          },
+          "offer": {
+            "label": "Promotional Offer",
+            "placeholder": "Select an active offer (optional)",
+            "description": "Apply a special discount or campaign offer"
+          },
+          "slug": {
+            "label": "Product Slug",
+            "placeholder": "e.g. modern-leather-sofa",
+            "description": "Unique URL identifier for the product (lowercase and hyphens)"
+          },
+          "warranty": {
+            "label": "Warranty (Years)",
+            "placeholder": "e.g. 3",
+            "description": "Product warranty duration in years"
+          },
+          "weight": {
+            "label": "Weight",
+            "placeholder": "e.g. 45 kg",
+            "description": "Approximate weight of the product"
+          },
+          "status": {
+            "label": "Product Status",
+            "hint": "Active products are visible to customers",
+            "description": "Toggle whether this product is publicly active"
+          },
+          "isBestSeller": {
+            "label": "Best Seller",
+            "hint": "Highlights product with a best-seller badge",
+            "description": "Mark as a top-selling featured product"
+          },
+          "isCustomizable": {
+            "label": "Customizable",
+            "hint": "Indicates custom size or fabric options",
+            "description": "Allow customer customization requests"
+          },
+          "arName": {
+            "label": "Arabic Name",
+            "placeholder": "أدخل اسم المنتج بالعربية",
+            "description": "Product title displayed to Arabic users"
+          },
+          "arSmallDescription": {
+            "label": "Arabic Short Summary",
+            "placeholder": "ملخص تسويقي سريع في سطرين",
+            "description": "Concise summary for cards and search results"
+          },
+          "arDescription": {
+            "label": "Arabic Full Description",
+            "placeholder": "اكتب وصفاً مفصلاً للمنتج ومميزاته وجودته",
+            "description": "Detailed description of the product"
+          },
+          "arMaterials": {
+            "label": "Arabic Materials",
+            "placeholder": "مثال: خشب زان أحمر، قماش كتان، معدن مطلي",
+            "description": "Comma-separated list of materials used"
+          },
+          "arFeatures": {
+            "label": "Arabic Features",
+            "placeholder": "مثال: أرجل معدنية قوية، حشوة إسفنج كثيف، مقاوم للخدش",
+            "description": "Comma-separated key features"
+          },
+          "arHeight": {
+            "label": "Height",
+            "placeholder": "e.g. 85 cm",
+            "description": "Total height"
+          },
+          "arWidth": {
+            "label": "Width / Depth",
+            "placeholder": "e.g. 210 x 95 cm",
+            "description": "Dimensions"
+          },
+          "enName": {
+            "label": "English Name",
+            "placeholder": "Enter product name in English",
+            "description": "Product title displayed to English users"
+          },
+          "enSmallDescription": {
+            "label": "English Short Summary",
+            "placeholder": "Short punchy marketing summary",
+            "description": "Concise summary for cards and search"
+          },
+          "enDescription": {
+            "label": "English Full Description",
+            "placeholder": "Write full detailed description of comfort and craftsmanship",
+            "description": "Detailed description of the product"
+          },
+          "enMaterials": {
+            "label": "English Materials",
+            "placeholder": "e.g. Beech wood, Linen fabric, Steel legs",
+            "description": "Comma-separated list of materials"
+          },
+          "enFeatures": {
+            "label": "English Features",
+            "placeholder": "e.g. High resilience foam, Ergonomic backrest",
+            "description": "Comma-separated key features"
+          },
+          "enHeight": {
+            "label": "Height",
+            "placeholder": "e.g. 85 cm",
+            "description": "Total height"
+          },
+          "enWidth": {
+            "label": "Width / Depth",
+            "placeholder": "e.g. 210 x 95 cm",
+            "description": "Dimensions"
+          },
+          "tags": {
+            "label": "Product Search Tags",
+            "placeholder": "e.g. sofa, living room, modern, luxury, furniture",
+            "description": "Comma-separated tags for filtering and search"
+          },
+          "metaTitleAr": {
+            "label": "Arabic Meta Title (SEO)",
+            "placeholder": "عنوان الصفحة في محركات البحث بالعربية",
+            "description": "Title tag for search engines"
+          },
+          "metaTitleEn": {
+            "label": "English Meta Title (SEO)",
+            "placeholder": "SEO page title in English",
+            "description": "Title tag for search engines"
+          },
+          "metaDescriptionAr": {
+            "label": "Arabic Meta Description",
+            "placeholder": "وصف يظهر في نتائج بحث جوجل بالعربية",
+            "description": "Meta description tag"
+          },
+          "metaDescriptionEn": {
+            "label": "English Meta Description",
+            "placeholder": "Meta description appearing in search results",
+            "description": "Meta description tag"
+          },
+          "metaKeywords": {
+            "label": "SEO Keywords",
+            "placeholder": "e.g. teleb furniture, living room, leather couch",
+            "description": "Comma-separated keywords"
+          },
+          "images": {
+            "label": "Product Gallery Images",
+            "description": "Upload up to 5 high-resolution images. The first image will be the primary card display."
+          }
+        },
+        "switchViewLanguage": "Preview other language"
       },
       "collections": {
         "title": "Collections",

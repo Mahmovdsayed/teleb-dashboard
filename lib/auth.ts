@@ -70,4 +70,3 @@ export async function authenticateRequest(request: NextRequest): Promise<AuthRes
     payload: result.payload,
   }
 }
-
