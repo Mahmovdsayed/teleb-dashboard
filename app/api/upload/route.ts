@@ -49,16 +49,17 @@ export async function POST(req: NextRequest) {
     })
     response.headers.set("X-Auth-Method", cookieVal ? "cookie (access_token)" : "authorization_header")
     return response
-  } catch (error: any) {
-    console.error("Upload error in /api/upload:", error)
-    return NextResponse.json(
-      {
-        success: false,
-        message: error?.message || "Failed to upload image to Cloudinary",
-      },
-      { status: 500 }
-    )
-  }
+  } catch (error) {
+  console.error("[Upload] Full error:", error)
+
+  return NextResponse.json(
+    {
+      success: false,
+      message: error instanceof Error ? error.message : String(error),
+    },
+    { status: 500 },
+  )
+}
 }
 
 export async function DELETE(req: NextRequest) {
@@ -75,13 +76,12 @@ export async function DELETE(req: NextRequest) {
     const deleted = await deleteImageFromCloudinary(publicId)
 
     return NextResponse.json({ success: deleted })
-  } catch (error) {
-    console.error("[Upload] Full error:", error)
-
+  } catch (error: any) {
+    console.error("Delete error in /api/upload:", error)
     return NextResponse.json(
       {
         success: false,
-        message: error instanceof Error ? error.message : String(error),
+        message: error?.message || "Failed to delete image from Cloudinary",
       },
       { status: 500 }
     )
