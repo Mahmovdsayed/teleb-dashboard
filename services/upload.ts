@@ -1,5 +1,3 @@
-import axios from "axios"
-
 export interface UploadImageOptions {
   folderName?: string
   width?: number
@@ -13,42 +11,71 @@ export interface UploadImageResult {
   publicId: string
 }
 
+interface UploadImageResponse {
+  success: boolean
+  data?: UploadImageResult
+  message?: string
+}
+
 export const uploadImageApi = async (file: File, options?: UploadImageOptions): Promise<UploadImageResult> => {
   const formData = new FormData()
-  formData.append("file", file)
-  if (options?.folderName) formData.append("folderName", options.folderName)
-  if (options?.width) formData.append("width", String(options.width))
-  if (options?.height) formData.append("height", String(options.height))
 
-  const response = await axios.post<{
-    success: boolean
-    data?: UploadImageResult
-    message?: string
-  }>("/api/upload", formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
+  formData.append("file", file)
+
+  if (options?.folderName) {
+    formData.append("folderName", options.folderName)
+  }
+
+  if (options?.width) {
+    formData.append("width", String(options.width))
+  }
+
+  if (options?.height) {
+    formData.append("height", String(options.height))
+  }
+
+  options?.onProgress?.(0)
+
+  const response = await fetch("/api/upload", {
+    method: "POST",
+    body: formData,
     signal: options?.signal,
-    onUploadProgress: (progressEvent) => {
-      if (progressEvent.total) {
-        const rawPercent = (progressEvent.loaded / progressEvent.total) * 90
-        const percentCompleted = Math.round(rawPercent)
-        options?.onProgress?.(percentCompleted)
-      }
-    },
+    credentials: "same-origin",
   })
 
-  if (!response.data.success || !response.data.data) {
-    throw new Error(response.data.message || "Upload failed")
+  const result = (await response.json()) as UploadImageResponse
+
+  if (!response.ok) {
+    throw new Error(result.message || `Upload failed with status ${response.status}`)
+  }
+
+  if (!result.success || !result.data) {
+    throw new Error(result.message || "Upload failed")
   }
 
   options?.onProgress?.(100)
-  return response.data.data
+
+  return result.data
 }
 
 export const deleteImageApi = async (publicId: string): Promise<boolean> => {
-  const response = await axios.delete<{ success: boolean; message?: string }>("/api/upload", {
-    data: { publicId },
+  const response = await fetch("/api/upload", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "same-origin",
+    body: JSON.stringify({ publicId }),
   })
-  return response.data.success
+
+  const result = (await response.json()) as {
+    success: boolean
+    message?: string
+  }
+
+  if (!response.ok) {
+    throw new Error(result.message || `Delete failed with status ${response.status}`)
+  }
+
+  return result.success
 }

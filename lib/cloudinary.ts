@@ -11,8 +11,6 @@ cloudinary.config({
 })
 
 export const uploadImageToCloudinary = async (image: File, folderName: string, size?: { width?: number; height?: number }): Promise<{ imageUrl: string; publicId: string }> => {
-   const ping = await cloudinary.api.ping()
-  console.info("[Cloudinary Ping]", ping)
   if (!isValidFileSize(image, MAX_IMAGE_SIZE)) {
     throw new Error("Image is too large")
   }
