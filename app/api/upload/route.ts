@@ -50,6 +50,7 @@ export async function POST(req: NextRequest) {
     response.headers.set("X-Auth-Method", cookieVal ? "cookie (access_token)" : "authorization_header")
     return response
   } catch (error) {
+    
   console.error("[Upload] Full error:", error)
 
   return NextResponse.json(
