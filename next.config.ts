@@ -12,7 +12,6 @@ const nextConfig: NextConfig = {
     turbopackGc: true,
     turbopackLazyDynamicImports: true,
     turbopackRustReactCompiler: true,
-    turbopackPluginRuntimeStrategy: "workerThreads",
   },
   compiler: {
     removeConsole: true,

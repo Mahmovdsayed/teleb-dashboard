@@ -1,10 +1,14 @@
 import OfferPage from "@/components/pages/offer/OfferPage";
+import OfferSkeleton from "@/components/skeletons/OfferSkeleton";
+import { Suspense } from "react";
 
 export const instant = false
 
 const page = () => {
   return <>
-    <OfferPage />
+    <Suspense fallback={<OfferSkeleton />}>
+      <OfferPage />
+    </Suspense>
   </>;
 };
 
