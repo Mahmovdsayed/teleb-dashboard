@@ -8,18 +8,17 @@ const nextConfig: NextConfig = {
   productionBrowserSourceMaps: false,
   poweredByHeader: false,
   compress: true,
-  compiler: {
-    // removeConsole: true,
-  },
   experimental: {
-    optimizeCss: true,
-    inlineCss: true,
-    // turbopackGc: true,
-    // turbopackLazyDynamicImports: true,
+    turbopackGc: true,
+    turbopackLazyDynamicImports: true,
     turbopackRustReactCompiler: true,
-    // turbopackPluginRuntimeStrategy: "workerThreads",
+    turbopackPluginRuntimeStrategy: "workerThreads",
+  },
+  compiler: {
+    removeConsole: true,
   },
 }
 
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts")
+
 export default withNextIntl(nextConfig)
