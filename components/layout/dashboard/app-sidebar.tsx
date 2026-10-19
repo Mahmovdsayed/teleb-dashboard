@@ -19,10 +19,6 @@ import { useTranslations } from "next-intl"
 import { useStore } from "@/store"
 
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-  },
   navMain: [
     {
       title: "dashboard",
