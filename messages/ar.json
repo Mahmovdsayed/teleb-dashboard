@@ -35,6 +35,36 @@
     "title": "مرحبًا بك في لوحة القيادة!",
     "description": "يمكنك الآن إضافة المكونات والبدء في البناء.",
     "button": "زر",
+    "home": {
+      "stats": {
+        "collections": "المجموعات",
+        "offers": "العروض",
+        "products": "المنتجات",
+        "messages": "الرسائل",
+        "activeCount": "{active} من {total} نشط",
+        "currentlyActive": "{count} عرض نشط حاليًا",
+        "currentlyActivePlural": "{count} عروض نشطة حاليًا",
+        "unreadMessages": "{count} غير مقروءة",
+        "highPriorityMessages": "{count} ذات أولوية عالية"
+      },
+      "table": {
+        "title": "أحدث المنتجات",
+        "description": "نظرة سريعة وإدارة منتجات كتالوج المتجر.",
+        "viewAll": "عرض جميع المنتجات",
+        "image": "الصورة",
+        "name": "المنتج",
+        "collection": "المجموعة",
+        "status": "الحالة",
+        "warranty": "الضمان",
+        "createdAt": "تاريخ الإضافة",
+        "actions": "الإجراءات",
+        "active": "نشط",
+        "inactive": "غير نشط",
+        "noProducts": "لا توجد منتجات حتى الآن",
+        "noProductsDesc": "ابدأ بإضافة أول منتج أثاث إلى متجرك.",
+        "years": "{count, plural, zero {# سنة} one {سنة} two {سنتان} few {# سنوات} many {# سنة} other {# سنة}}"
+      }
+    },
     "navigation": {
       "title": "القائمة الرئيسية",
       "dashboard": "لوحة التحكم",

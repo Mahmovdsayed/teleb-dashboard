@@ -35,6 +35,36 @@
     "title": "Welcome to the Dashboard!",
     "description": "You can now add components and start building.",
     "button": "Button",
+    "home": {
+      "stats": {
+        "collections": "Collections",
+        "offers": "Offers",
+        "products": "Products",
+        "messages": "Messages",
+        "activeCount": "{active} of {total} active",
+        "currentlyActive": "{count} active offer",
+        "currentlyActivePlural": "{count} active offers",
+        "unreadMessages": "{count} unread",
+        "highPriorityMessages": "{count} high priority"
+      },
+      "table": {
+        "title": "Recent Products",
+        "description": "Quick overview and management of your store catalog products.",
+        "viewAll": "View all products",
+        "image": "Image",
+        "name": "Product",
+        "collection": "Collection",
+        "status": "Status",
+        "warranty": "Warranty",
+        "createdAt": "Added",
+        "actions": "Actions",
+        "active": "Active",
+        "inactive": "Inactive",
+        "noProducts": "No products found",
+        "noProductsDesc": "Start by adding your first furniture product.",
+        "years": "{count, plural, one {# yr} other {# yrs}}"
+      }
+    },
     "navigation": {
       "title": "Main menu",
       "dashboard": "Dashboard",

@@ -1,11 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { Search } from "lucide-react";
-
+import { Loader2, Search, X } from "lucide-react";
 import SectionInfo from "@/components/layout/dashboard/SectionInfo";
-import { useAppQuery } from "@/hooks/useAppQuery";
+import { useAppQuery, keepPreviousData } from "@/hooks/useAppQuery";
+import { cn } from "@/lib/utils";
 import { getProducts } from "@/services/product";
 import { getCollections } from "@/services/collection";
 import { getOffers } from "@/services/offer";
@@ -14,17 +14,11 @@ import { Collection } from "@/types/Collection.types";
 import { OffersResult } from "@/types/Offer.types";
 import { useResourceFilters } from "@/hooks/useResourceFilters";
 import ResourceFilters from "@/components/ui/ResourceFilters";
-import {
-  createProductFilters,
-  DEFAULT_FILTERS,
-  FILTER_KEYS,
-} from "@/config/product-filters";
+import { createProductFilters, DEFAULT_FILTERS, FILTER_KEYS } from "@/config/product-filters";
 import { usePageSync } from "@/hooks/usePageSync";
 import EmptyState from "@/components/ui/EmptyState";
 import ProductCard from "@/components/ui/ProductCard";
-import ProductSkeleton, {
-  ProductCardSkeleton,
-} from "@/components/skeletons/ProductSkeleton";
+import ProductSkeleton, { ProductCardSkeleton } from "@/components/skeletons/ProductSkeleton";
 import AppPagination from "@/components/ui/AppPagination";
 import { Input } from "@/components/ui/input";
 
@@ -36,6 +30,18 @@ const ProductPage = () => {
 
   const { currentPage, setCurrentPage } = usePageSync();
   const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(searchTerm);
+      if (searchTerm.trim() !== debouncedSearch.trim()) {
+        setCurrentPage(1);
+      }
+    }, 400);
+
+    return () => clearTimeout(handler);
+  }, [searchTerm, debouncedSearch, setCurrentPage]);
 
   const defaultFilters = useMemo(
     () => ({ ...DEFAULT_FILTERS, page: currentPage }),
@@ -62,13 +68,14 @@ const ProductPage = () => {
   const activeFilters = useMemo(() => {
     return {
       ...filters,
-      q: searchTerm.trim() || undefined,
+      q: debouncedSearch.trim() || undefined,
     };
-  }, [filters, searchTerm]);
+  }, [filters, debouncedSearch]);
 
   const { data, isLoading, isFetching, refetch } = useAppQuery<ProductsResult>({
     queryFn: () => getProducts(activeFilters, locale),
     queryKey: ["products", locale, activeFilters],
+    placeholderData: keepPreviousData,
   });
 
   const collections = collectionsData ?? [];
@@ -83,10 +90,11 @@ const ProductPage = () => {
     locale,
   });
 
-  if (isLoading) return <ProductSkeleton />;
+  if (isLoading && !data) return <ProductSkeleton />;
 
   const products = data?.data ?? [];
   const total = data?.total ?? 0;
+  const isSearching = isFetching || searchTerm !== debouncedSearch;
 
   return (
     <section className="space-y-6">
@@ -100,17 +108,32 @@ const ProductPage = () => {
       />
 
       <div className="relative w-full max-w-md">
-        <Search className="absolute start-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+        <Search className="absolute inset-s-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" />
         <Input
           type="text"
           value={searchTerm}
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
-            setCurrentPage(1);
-          }}
+          onChange={(e) => setSearchTerm(e.target.value)}
           placeholder={tp("searchPlaceholder")}
-          className="ps-9 h-10 rounded-xl bg-card border-border/70"
+          className="ps-9 pe-9 h-10 rounded-xl bg-card border-border/70"
         />
+        <div className="absolute inset-e-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+          {isSearching && (
+            <Loader2 className="size-4 animate-spin text-muted-foreground" />
+          )}
+          {searchTerm && (
+            <button
+              type="button"
+              onClick={() => {
+                setSearchTerm("");
+                setDebouncedSearch("");
+                setCurrentPage(1);
+              }}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              <X className="size-4" />
+            </button>
+          )}
+        </div>
       </div>
 
       <ResourceFilters
@@ -120,19 +143,19 @@ const ProductPage = () => {
         onReset={() => {
           resetFilters();
           setSearchTerm("");
+          setDebouncedSearch("");
         }}
         fields={fields}
       />
 
       <div className="space-y-6">
-        {isFetching ? (
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
-            {Array.from({ length: products.length || 4 }).map((_, i) => (
-              <ProductCardSkeleton key={i} />
-            ))}
-          </div>
-        ) : products.length ? (
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
+        {products.length ? (
+          <div
+            className={cn(
+              "grid grid-cols-1 gap-4 lg:grid-cols-2 2xl:grid-cols-3 transition-opacity duration-200",
+              isFetching && "opacity-60 pointer-events-none"
+            )}
+          >
             {products.map((product: Product) => (
               <ProductCard
                 key={product.id}
@@ -141,6 +164,12 @@ const ProductPage = () => {
                 collections={collections}
                 offers={offers}
               />
+            ))}
+          </div>
+        ) : isFetching ? (
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <ProductCardSkeleton key={i} />
             ))}
           </div>
         ) : (

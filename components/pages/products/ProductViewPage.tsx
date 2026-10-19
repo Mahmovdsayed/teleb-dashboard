@@ -251,7 +251,7 @@ const ProductViewPage = ({
             <CardContent className="space-y-5 pt-4 text-sm">
               <div>
                 <p className="text-xs text-muted-foreground font-medium mb-1">
-                  {tp("fields.nameLabel.label" as any) || (isEn ? "Product Name" : "اسم المنتج")}
+                  {t("nameLabel")}
                 </p>
                 <p className="text-base font-bold text-foreground">
                   {translation.name || "—"}

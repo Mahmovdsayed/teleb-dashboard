@@ -3,6 +3,7 @@
 import { useFormHandler } from "@/hooks/useFormHandler";
 import { useState } from "react";
 import z from "zod";
+import { useQueryClient } from "@tanstack/react-query";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Loader2, Trash2 } from "lucide-react";
@@ -21,10 +22,12 @@ const DeleteButton = ({ isIcon, title, serviceFunc, refetch, warningMessage, cla
     const t = useTranslations("dashboard.resources")
     const [open, setOpen] = useState(false);
 
+    const queryClient = useQueryClient();
     const { onSubmit, loading } = useFormHandler({
         schema: z.object({}),
         service: () => serviceFunc(),
-        onSuccess: () => {
+        onSuccess: async () => {
+            await queryClient.invalidateQueries({ queryKey: ["analytics"] });
             refetch();
             setOpen(false);
         },

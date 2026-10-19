@@ -22,11 +22,16 @@ const AddCollectionForm = () => {
         defaultValues: collectionInitialValues,
         service: (data: CreateCollectionInput) => addCollection(data, locale),
         onSuccess: async () => {
-            await queryClient.invalidateQueries({
-                queryKey: ["collections"],
-                exact: true,
-                refetchType: "all",
-            });
+            await Promise.all([
+                queryClient.invalidateQueries({
+                    queryKey: ["collections"],
+                    exact: true,
+                    refetchType: "all",
+                }),
+                queryClient.invalidateQueries({
+                    queryKey: ["analytics"],
+                }),
+            ]);
             reset();
             ConfettiFireworks();
             push("/collection");

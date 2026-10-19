@@ -189,10 +189,15 @@ const AddProductForm = () => {
       return newProduct;
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({
-        queryKey: ["products"],
-        exact: false,
-      });
+      await Promise.all([
+        queryClient.invalidateQueries({
+          queryKey: ["products"],
+          exact: false,
+        }),
+        queryClient.invalidateQueries({
+          queryKey: ["analytics"],
+        }),
+      ]);
       reset();
       setImages([]);
       ConfettiFireworks();

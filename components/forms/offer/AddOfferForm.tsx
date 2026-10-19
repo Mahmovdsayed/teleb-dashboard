@@ -44,7 +44,10 @@ const AddOfferForm = () => {
         defaultValues: offerInitialValues as unknown as CreateOfferFormValues,
         service: (data: CreateOfferFormValues) => addOffer(data, locale),
         onSuccess: async () => {
-            await queryClient.invalidateQueries({ queryKey: ["offers"], exact: true, refetchType: "all" });
+            await Promise.all([
+                queryClient.invalidateQueries({ queryKey: ["offers"], exact: true, refetchType: "all" }),
+                queryClient.invalidateQueries({ queryKey: ["analytics"] }),
+            ]);
             reset();
             ConfettiFireworks();
             push("/offer");
