@@ -1,6 +1,7 @@
 import { v2 as cloudinary } from "cloudinary"
 import { fileToBuffer, isValidFileSize, isValidFileType } from "./file-type"
 import { BASE_FOLDER, IMAGE_EXTENSIONS, MAX_IMAGE_SIZE } from "@/constant/image-constants"
+import sharp from "sharp"
 
 cloudinary.config({
   cloud_name: (typeof Bun !== "undefined" ? Bun.env.CLOUDINARY_CLOUD_NAME : undefined) || process.env.CLOUDINARY_CLOUD_NAME,
@@ -9,35 +10,32 @@ cloudinary.config({
   secure: true,
 })
 
-export const uploadImageToCloudinary = async (
-  image: File,
-  folderName: string,
-  size?: { width?: number; height?: number }
-): Promise<{ imageUrl: string; publicId: string }> => {
-  if (!isValidFileSize(image, MAX_IMAGE_SIZE)) throw new Error("Image is too large")
+export const uploadImageToCloudinary = async (image: File, folderName: string, size?: { width?: number; height?: number }): Promise<{ imageUrl: string; publicId: string }> => {
+  if (!isValidFileSize(image, MAX_IMAGE_SIZE)) {
+    throw new Error("Image is too large")
+  }
 
   const { valid, detectedType } = await isValidFileType(image, IMAGE_EXTENSIONS, true)
-  if (!valid || !detectedType) throw new Error("Unsupported image type")
+
+  if (!valid || !detectedType) {
+    throw new Error("Unsupported image type")
+  }
 
   const buffer = await fileToBuffer(image)
-  const mime = `image/${detectedType === "jpg" ? "jpeg" : detectedType}`
-  const dataURI = `data:${mime};base64,${buffer.toString("base64")}`
 
-  const transformation = size?.width && size?.height ? [
-    {
-      width: size.width,
-      height: size.height,
-      crop: "fill",
-      gravity: "auto",
-      quality: 100,
-    },
-  ] : undefined
+  let pipeline = sharp(buffer).rotate()
 
-  const result = await cloudinary.uploader.upload(dataURI, {
+  if (size?.width && size?.height) {
+    pipeline = pipeline.resize(size.width, size.height, {
+      fit: "cover",
+      position: "attention",
+    })
+  }
+  const webpBuffer = await pipeline.webp({ quality: 100, effort: 4 }).toBuffer()
+
+  const result = await cloudinary.uploader.upload(`data:image/webp;base64,${webpBuffer.toString("base64")}`, {
     folder: `${BASE_FOLDER}/${folderName}`,
-    allowed_formats: IMAGE_EXTENSIONS,
     resource_type: "image",
-    transformation,
     format: "webp",
   })
 

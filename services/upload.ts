@@ -24,7 +24,7 @@ export const uploadImageApi = async (file: File, options?: UploadImageOptions): 
     success: boolean
     data?: UploadImageResult
     message?: string
-  }>("/api/upload", formData, {
+  }>("https://dashboard.teleb-furniture.com/api/upload", formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },

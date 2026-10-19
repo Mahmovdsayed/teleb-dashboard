@@ -116,8 +116,6 @@ const AddProductForm = () => {
         if (item.file) {
           const result = await uploadImageApi(item.file, {
             folderName: "products",
-            width: 1080,
-            height: 1080,
           });
           uploadedImages.push({
             url: result.imageUrl,
