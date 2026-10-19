@@ -4,9 +4,9 @@ import { BASE_FOLDER, IMAGE_EXTENSIONS, MAX_IMAGE_SIZE } from "@/constant/image-
 import sharp from "sharp"
 
 cloudinary.config({
-  cloud_name: (typeof Bun !== "undefined" ? Bun.env.CLOUDINARY_CLOUD_NAME : undefined) || process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: (typeof Bun !== "undefined" ? Bun.env.CLOUDINARY_API_KEY : undefined) || process.env.CLOUDINARY_API_KEY,
-  api_secret: (typeof Bun !== "undefined" ? Bun.env.CLOUDINARY_API_SECRET : undefined) || process.env.CLOUDINARY_API_SECRET,
+  cloud_name:  process.env.CLOUDINARY_CLOUD_NAME!,
+  api_key:  process.env.CLOUDINARY_API_KEY!,
+  api_secret: process.env.CLOUDINARY_API_SECRET!,
   secure: true,
 })
 
