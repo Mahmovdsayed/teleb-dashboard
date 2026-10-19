@@ -11,6 +11,12 @@ cloudinary.config({
 })
 
 export const uploadImageToCloudinary = async (image: File, folderName: string, size?: { width?: number; height?: number }): Promise<{ imageUrl: string; publicId: string }> => {
+  console.info("[Cloudinary Config]", {
+  cloudNameConfigured: Boolean(process.env.CLOUDINARY_CLOUD_NAME),
+  apiKeyConfigured: Boolean(process.env.CLOUDINARY_API_KEY),
+  apiSecretConfigured: Boolean(process.env.CLOUDINARY_API_SECRET),
+  cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+})
   if (!isValidFileSize(image, MAX_IMAGE_SIZE)) {
     throw new Error("Image is too large")
   }
