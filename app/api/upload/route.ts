@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
-import { uploadImageToCloudinary, deleteImageFromCloudinary } from "@/lib/cloudinary."
 import { MAX_IMAGE_SIZE } from "@/constant/image-constants"
 import { authenticateRequest } from "@/lib/auth"
+import { deleteImageFromCloudinary, uploadImageToCloudinary } from "@/lib/cloudinary"
 
 export async function POST(req: NextRequest) {
   const cookieVal = req.cookies.get("access_token")?.value
@@ -75,12 +75,13 @@ export async function DELETE(req: NextRequest) {
     const deleted = await deleteImageFromCloudinary(publicId)
 
     return NextResponse.json({ success: deleted })
-  } catch (error: any) {
-    console.error("Delete error in /api/upload:", error)
+  } catch (error) {
+    console.error("[Upload] Full error:", error)
+
     return NextResponse.json(
       {
         success: false,
-        message: error?.message || "Failed to delete image from Cloudinary",
+        message: error instanceof Error ? error.message : String(error),
       },
       { status: 500 }
     )
