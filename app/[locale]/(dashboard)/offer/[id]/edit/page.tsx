@@ -8,8 +8,6 @@ interface IProps {
   params: Promise<{ id: string }>;
 }
 
-export const instant = false;
-
 const OfferData = async ({ params }: IProps) => {
   const { id } = await params;
   const offer = await getOfferById(id);

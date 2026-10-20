@@ -8,8 +8,6 @@ interface IProps {
   params: Promise<{ id: string; locale: string }>;
 }
 
-export const instant = false;
-
 const ProductEditData = async ({ params }: IProps) => {
   const { id, locale } = await params;
   const product = await getProductById(id, locale);

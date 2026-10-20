@@ -8,8 +8,6 @@ interface IProps {
   params: Promise<{ id: string }>
 }
 
-export const instant = false
-
 const CollectionData = async ({ params }: IProps) => {
   const { id } = await params
   const collection = await getCollectionById(id)

@@ -10,8 +10,6 @@ interface IProps {
   params: Promise<{ id: string; locale: string }>;
 }
 
-export const instant = false;
-
 const ProductViewData = async ({ params }: IProps) => {
   const { id, locale } = await params;
   const [product, collections, offersRes] = await Promise.all([

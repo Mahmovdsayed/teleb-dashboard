@@ -1,10 +1,11 @@
 import HomePage from "@/components/pages/home/HomePage";
-
-export const instant = false
+import { Suspense } from "react";
 
 const page = () => {
   return <>
-    <HomePage />
+    <Suspense fallback={<div></div>}>
+      <HomePage />
+    </Suspense>
   </>;
 };
 
