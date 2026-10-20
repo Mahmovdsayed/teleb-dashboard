@@ -13,9 +13,9 @@ const nextConfig: NextConfig = {
     turbopackLazyDynamicImports: true,
     turbopackRustReactCompiler: true,
   },
-  // compiler: {
-  //   removeConsole: true,
-  // },
+  compiler: {
+    removeConsole: true,
+  },
 }
 
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts")
