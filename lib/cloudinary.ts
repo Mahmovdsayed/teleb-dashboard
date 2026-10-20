@@ -1,5 +1,3 @@
-"use server"
-
 import { v2 as cloudinary } from "cloudinary"
 import { fileToBuffer, isValidFileSize, isValidFileType } from "./file-type"
 import { BASE_FOLDER, IMAGE_EXTENSIONS, MAX_IMAGE_SIZE } from "@/constant/image-constants"
@@ -12,66 +10,36 @@ cloudinary.config({
 })
 
 export const uploadImageToCloudinary = async (image: File, folderName: string, size?: { width?: number; height?: number }): Promise<{ imageUrl: string; publicId: string }> => {
-  try {
-    if (!isValidFileSize(image, MAX_IMAGE_SIZE)) {
-      throw new Error("Image is too large")
-    }
+  if (!isValidFileSize(image, MAX_IMAGE_SIZE)) {
+    throw new Error("Image is too large")
+  }
 
-    const { valid, detectedType } = await isValidFileType(image, IMAGE_EXTENSIONS, true)
+  const { valid, detectedType } = await isValidFileType(image, IMAGE_EXTENSIONS, true)
 
-    if (!valid || !detectedType) {
-      throw new Error("Unsupported image type")
-    }
+  if (!valid || !detectedType) {
+    throw new Error("Unsupported image type")
+  }
 
-    console.info("[Cloudinary Upload] Processing image", {
-      name: image.name,
-      size: image.size,
-      type: image.type,
-      folderName,
+  const buffer = await fileToBuffer(image)
+  let pipeline = sharp(buffer).rotate()
+
+  if (size?.width && size?.height) {
+    pipeline = pipeline.resize(size.width, size.height, {
+      fit: "cover",
+      position: "attention",
     })
+  }
+  const webpBuffer = await pipeline.webp({ quality: 100, effort: 4 }).toBuffer()
 
-    const buffer = await fileToBuffer(image)
+  const result = await cloudinary.uploader.upload(`data:image/webp;base64,${webpBuffer.toString("base64")}`, {
+    folder: `${BASE_FOLDER}/${folderName}`,
+    resource_type: "image",
+    format: "webp",
+  })
 
-    let pipeline = sharp(buffer).rotate()
-
-    if (size?.width && size?.height) {
-      pipeline = pipeline.resize(size.width, size.height, {
-        fit: "cover",
-        position: "attention",
-      })
-    }
-
-    const webpBuffer = await pipeline.webp({ quality: 100, effort: 4 }).toBuffer()
-
-    console.info("[Cloudinary Upload] Image converted", {
-      originalSize: image.size,
-      convertedSize: webpBuffer.length,
-      format: "webp",
-    })
-
-    const result = await cloudinary.uploader.upload(`data:image/webp;base64,${webpBuffer.toString("base64")}`, {
-      folder: `${BASE_FOLDER}/${folderName}`,
-      resource_type: "image",
-      format: "webp",
-    })
-
-    console.info("[Cloudinary Upload] Success", {
-      publicId: result.public_id,
-    })
-
-    return {
-      imageUrl: result.secure_url,
-      publicId: result.public_id,
-    }
-  } catch (error) {
-    console.error("[Cloudinary Upload] Failed", {
-      error,
-      message: error instanceof Error ? error.message : String(error),
-      httpCode: typeof error === "object" && error !== null && "http_code" in error ? error.http_code : undefined,
-      name: error instanceof Error ? error.name : undefined,
-    })
-
-    throw error
+  return {
+    imageUrl: result.secure_url,
+    publicId: result.public_id,
   }
 }
 

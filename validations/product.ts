@@ -1,17 +1,17 @@
-import { z } from "zod";
+import { z } from "zod"
 
 const optionalTrimmedString = (max?: number) => {
-  let schema = z.string().trim();
-  if (max) schema = schema.max(max);
-  return schema.optional().transform((val) => (val === "" ? undefined : val));
-};
+  let schema = z.string().trim()
+  if (max) schema = schema.max(max)
+  return schema.optional().transform((val) => (val === "" ? undefined : val))
+}
 
 const optionalStringArray = () =>
   z
     .array(z.string().trim().min(1))
     .optional()
     .default([])
-    .transform((val) => (val && val.length > 0 ? val : []));
+    .transform((val) => (val && val.length > 0 ? val : []))
 
 export const productFormSchema = z.object({
   collectionId: z.coerce.number().int().positive({ message: "Collection is required" }),
@@ -21,7 +21,8 @@ export const productFormSchema = z.object({
     .positive()
     .nullable()
     .optional()
-    .transform((val) => (val && val > 0 ? val : null)),
+    .transform((val) => (val && val > 0 ? val : null))
+    .catch(null),
   slug: z
     .string()
     .trim()
@@ -58,29 +59,27 @@ export const productFormSchema = z.object({
   metaDescriptionAr: optionalTrimmedString(500),
   metaDescriptionEn: optionalTrimmedString(500),
   metaKeywords: optionalStringArray(),
-});
+})
 
-export const createProductSchema = z.compile(productFormSchema);
-export const updateProductSchema = z.compile(productFormSchema.partial());
+export const createProductSchema = z.compile(productFormSchema)
+export const updateProductSchema = z.compile(productFormSchema.partial())
 
-export type CreateProductFormValues = z.input<typeof createProductSchema>;
-export type UpdateProductFormValues = z.input<typeof updateProductSchema>;
+export type CreateProductFormValues = z.input<typeof createProductSchema>
+export type UpdateProductFormValues = z.input<typeof updateProductSchema>
 
-/** Convert a string array to {name: string}[] for the backend */
 export function toObjectArray(arr?: string[] | null): { name: string }[] {
-  if (!Array.isArray(arr)) return [];
-  return arr.filter(Boolean).map((name) => ({ name }));
+  if (!Array.isArray(arr)) return []
+  return arr.filter(Boolean).map((name) => ({ name }))
 }
 
-// Legacy helpers kept for backward compatibility but no longer needed in forms
 export function splitCommaString(str?: string | null): string[] {
-  if (!str) return [];
+  if (!str) return []
   return str
     .split(",")
     .map((s) => s.trim())
-    .filter(Boolean);
+    .filter(Boolean)
 }
 
 export function splitToObjectArray(str?: string | null): { name: string }[] {
-  return splitCommaString(str).map((name) => ({ name }));
+  return splitCommaString(str).map((name) => ({ name }))
 }

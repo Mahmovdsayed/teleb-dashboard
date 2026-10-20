@@ -264,22 +264,15 @@ const AddProductForm = () => {
                   delay={0}
                 />
 
-                <Controller
-                  control={control}
+                <FormSelect
                   name="offerId"
-                  render={({ field }) => (
-                    <FormSelect
-                      name="offerId"
-                      control={control}
-                      label={f("offer.label")}
-                      placeholder={f("offer.placeholder")}
-                      description={f("offer.description")}
-                      defaultValue={field.value ? String(field.value) : "none"}
-                      options={offerOptions}
-                      error={errors.offerId as FieldError}
-                      delay={0}
-                    />
-                  )}
+                  control={control}
+                  label={f("offer.label")}
+                  placeholder={f("offer.placeholder")}
+                  description={f("offer.description")}
+                  options={offerOptions}
+                  error={errors.offerId as FieldError}
+                  delay={0}
                 />
               </div>
 
