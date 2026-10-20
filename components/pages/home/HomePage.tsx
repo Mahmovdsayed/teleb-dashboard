@@ -26,7 +26,7 @@ export default function HomePage() {
         isLoading: productsLoading,
         refetch: refetchProducts,
     } = useAppQuery<ProductsResult>({
-        queryFn: () => getProducts({ page: currentPage, limit: 1, sort: "createdAt", order: "desc" }, locale),
+        queryFn: () => getProducts({ page: currentPage, limit: 10, sort: "createdAt", order: "desc" }, locale),
         queryKey: ["products", "home-table", locale, currentPage],
         placeholderData: keepPreviousData,
     });
