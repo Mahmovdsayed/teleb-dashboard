@@ -104,7 +104,7 @@ export function createProductFilters({ filters, updateFilter, collections = [], 
 
 export const DEFAULT_FILTERS: ProductQueryInput = {
   page: 1,
-  limit: 10,
+  limit: 100,
   sort: "createdAt",
   order: "desc",
 }
