@@ -183,7 +183,7 @@ const ProductPage = () => {
 
         <AppPagination
           total={total}
-          pageSize={10}
+          pageSize={100}
           currentPage={currentPage}
           onPageChange={setCurrentPage}
         />
