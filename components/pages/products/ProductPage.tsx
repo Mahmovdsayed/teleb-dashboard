@@ -34,19 +34,21 @@ const ProductPage = () => {
 
   useEffect(() => {
     const handler = setTimeout(() => {
-      setDebouncedSearch(searchTerm);
-      if (searchTerm.trim() !== debouncedSearch.trim()) {
-        setCurrentPage(1);
-      }
+      const nextSearch = searchTerm.trim();
+
+      setDebouncedSearch((previous) => {
+        if (previous.trim() !== nextSearch) {
+          setCurrentPage(1);
+        }
+
+        return nextSearch;
+      });
     }, 400);
 
     return () => clearTimeout(handler);
-  }, [searchTerm, debouncedSearch, setCurrentPage]);
+  }, [searchTerm, setCurrentPage]);
 
-  const defaultFilters = useMemo(
-    () => ({ ...DEFAULT_FILTERS, page: currentPage }),
-    [currentPage]
-  );
+  const defaultFilters = DEFAULT_FILTERS;
 
   const { filters, updateFilter, resetFilters, hasFilters } =
     useResourceFilters<ProductQueryInput>({

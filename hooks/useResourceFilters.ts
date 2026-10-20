@@ -82,10 +82,7 @@ export function useResourceFilters<TFilters extends { page?: number }>({ default
 
     setFilters(nextFilters)
     writeFiltersToUrl(nextFilters)
-
-    if (filters.page !== 1) {
-      onPageReset?.()
-    }
+    onPageReset?.()
   }
 
   const resetFilters = () => {
